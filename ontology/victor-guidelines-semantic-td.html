@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Guidelines for the Semantic Annotation of Thing Descriptions</title>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+        specStatus: "WG-NOTE",
+        editors: [{
+          name: "Victor Charpenay",
+          company: "Siemens AG",
+          companyURL: "http://siemens.com/"
+        }],
+        github: "https://github.com/w3c/wot-thing-description/",
+        shortName: "semantic-td",
+        wg: "Web of Things Working Group",
+        wgURI: "https://www.w3.org/WoT/WG/",
+        charterDisclosureURI: "https://www.w3.org/2016/12/wot-wg-2016.html"
+      };
+    </script>
+  </head>
+  <body>
+    <section id='abstract'>
+      <p>
+        This document provides a series of guidelines to annotate Thing Description (TD) documents
+        with RDF statements containing external vocabularies. The following assertions are made
+        throughout the document:
+        <ul>
+          <li>
+            'Thing' identifiers should be non-dereferenceable IRIs (e.g. URNs).
+          </li>
+          <li>
+            'Thing'-specific entities should be identified by IRIs relative to the identifier of
+            a 'thing'.
+          </li>
+          <li>
+            The definition of properties, actions and events should be consistent over a TD and
+            follow one of the following design patterns: actions-only, properties-only, events-only.
+          </li>
+          <li>
+            WoT scripts should use semantic annotations only, for reusability.
+          </li>
+          <li>
+            Vendor-specific vocabularies should be published on the Semantic Web as RDFS or OWL
+            vocabularies.
+          </li>
+        </ul>
+      </p>
+    </section>
+    
+    <section id='sotd'>
+      <p>TODO</p>
+    </section>
+    
+    <section id='identifiers'>
+      <h2>Identifiers and References for Linked Data</h2>
+        
+      <p>
+        The primary purpose of semantic annotations in a Thing Description (TD) is to increase
+        knowledge of the general context in which a connected device operates. A common practice
+        in this regard is to integrate TD documents of various origins in a single knowledge base,
+        augmented with external knowledge, and run logical inference to infer new statements, which
+        would not follow from TDs taken individually. In this integration process, identifying
+        'things' and other physical world entities is crucial.
+      </p>
+      
+      <section id="thing-identifiers">
+        <h3>Identifying Things with IRIs</h3>
+        
+        <p>
+          Every 'thing' on the Internet of Things (IoT) must be identifiable to be part of the network.
+          Identification can be as simple as providing an IP address to all digital appliances but
+          the original concept of the IoT, as developed by Kevin Ashton, includes other mechanisms,
+          especially Radio-frequency identification (RFID). RFID allows any inanimate object (any
+          'thing') to be uniquely identifiable if tagged with e.g. an NFC chip. RFID is the digital
+          counterpart to bar codes, in the physical domain.
+        </p>
+        
+        <p>
+          However, RFID tags or bar codes are only containers for digital identifiers and do not
+          guarantee uniqueness by themselves. Similarly, any communication-specific identifier like an
+          IP address cannot offer a global identification scheme for physical world entities. The Web,
+          on the other hand, provides a well-defined mechanism to identify 'things': the Uniform
+          Resource Identifier (URI) and its internationalized extension, the IRI. Therefore, 'things'
+          on the Web of Things (WoT) must be identified by IRIs.
+        </p>
+
+        <p>
+          The TD model includes the mandatory field <code>id</code>, interpreted
+          as an IRI, but no further constraint is imposed on what IRI to use. It is important, however,
+          to distinguish between the Web resource that represents the physical world entity (the
+          'thing') and the Web resource describing this entity (a TD document). For instance, a TD has
+          a format like any digital document but a physical device has not. Similarly, a physical
+          'thing' has a geographical location but its TD has not, as a virtual entity. Finally, TD
+          documents must have dereferenceable IRIs (e.g. via HTTP, CoAP or MQTT) but 'things' may not.
+        </p>
+        
+        <aside class="example">
+          A sensor and its Thing Description (TODO)
+        </aside>
+        
+        <p>
+          Clear guidelines exist for the naming of physical world entities on the Semantic Web
+          [[cooluris]]. The two main approaches rely on HTTP URIs, either by using URI fragments in
+          a resource that includes formal definitions for several entities (an ontology), or by using
+          303 redirection to redirect to another document describing the entity, like a TD. In the
+          context of WoT, associating a Web server to all 'things' on the Web server might come with
+          scalability, security and lifecycle management issues. Another approach, which should be the
+          favored approach in WoT, is to use alternative non-dereferenceable URI schemes, such as
+          <code>urn</code>. A non-exhaustive list of URI schemes and URN namespaces compatible with WoT
+          is provided below.
+        </p>
+        
+        <table class="def" title="Recommended URI schemes to identify Things">
+          <tr>
+            <th>URI Scheme</th>
+            <th>Description</th>
+            <th>Example</th>
+            <th>Reference</th>
+          </tr>
+          <tr>
+            <td><code>urn</code></td>
+            <td>Uniform resource name</td>
+            <td><code>urn:example:a123,z456</code></td>
+            <td>[[RFC2141]]</td>
+          </tr>
+          <tr>
+            <td><code>ni</code></td>
+            <td>Named information (using hashes)</td>
+            <td><code>ni:///sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk</code></td>
+            <td>[[RFC6920]]</td>
+          </tr>
+          <tr>
+            <td><code>info</code></td>
+            <td>Information asset</td>
+            <td><code>info:ddc/22/eng//004.678</code></td>
+            <td>[[RFC4452]]</td>
+          </tr>
+          <tr>
+            <td><code>did</code></td>
+            <td>Distributed identifier</td>
+            <td><code>did:example:123456789abcdefghi</code></td>
+            <td><a href="https://w3c-ccg.github.io/did-spec/">See W3C Draft</a></td>
+          </tr>
+          <tr>
+            <td><code>iotdisco</code></td>
+            <td>IoT discovery item</td>
+            <td><code>iotdisco:SN=394872348732948723;MAN=www.ktc.se;MODEL=IMC;#V=1.2;KEY=4857402340298342</code></td>
+            <td><a href="https://www.iana.org/assignments/uri-schemes/prov/iotdisco">See IANA Registry</a></td>
+          </tr>
+          <tr>
+            <td><code>tag</code></td>
+            <td>Human-readable label</td>
+            <td><code>tag:SODA1R465__ART</code></td>
+            <td>[[RFC4151]]</td>
+          </tr>
+          <tr>
+            <td><code>xri</code></td>
+            <td>Extensible resource identifier</td>
+            <td><code>xri://northgate.library.example.com/(urn:isbn:0-395-36341-1)</code></td>
+            <td>[[XRI-TG]]</td>
+            <!-- to review: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri -->
+          </tr>
+        </table>
+        
+        <table class="def" title="Recommended URN Namespaces to identify Things">
+          <tr>
+            <th>URN Namespace</th>
+            <th>Description</th>
+            <th>Example</th>
+            <th>Reference</th>
+          </tr>
+          <tr>
+            <td><code>epc</code></td>
+            <td>Electronic product code</td>
+            <td><code>urn:epc:id:sgtin:900100.0003456.1234567</code></td>
+            <td>[[RFC5134]]</td>
+          </tr>
+          <tr>
+            <td><code>uuid</code></td>
+            <td>Universally unique identifier</td>
+            <td><code> urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6</code></td>
+            <td>[[RFC4122]]</td>
+          </tr>
+          <tr>
+            <td><code>dev</code></td>
+            <td>Device identifier</td>
+            <td><code>urn:dev:mac:0024befffe804ff</code></td>
+            <td><a href="https://tools.ietf.org/html/draft-ietf-core-dev-urn-02">See IETF Draft</a></td>
+          </tr>
+        </table>
+
+        <p>The IANA maintains an exhaustive and updated list of URI schemes [[IANA-URI-SCHEMES]] and URN
+        namespaces [[IANA-URN-NAMESPACES]].</p>
+        
+        <p class="note" title="Non-dereferenceable IRIs & Linked Data">
+          The use of non-dereferenceable IRIs does not contradict the general Linked Data principles:
+          all entities identified as per these guidelines must be semantically linked to a dereferenceable
+          URI. The identifier of a 'thing' has necessarily been communicated to a Web client via a
+          TD, whose URI had been known first. For property, action and event objects, it is required
+          that they all link to a <code>Form</code> object, which contains a dereferenceable URI.
+        </p>
+      </section>
+        
+      <section id="thing-relative-identifiers">
+        <h3>Identifying Entities Relative to a Thing</h3>
+        
+        <p>
+          The distinction that exists between a 'thing' and its TD also exists for any entity inherent
+          to this 'thing' (e.g. its properties, the actions it can perform and the events it generates).
+          For instance, the temperature property of a sensor is distinct from the Web resource to
+          access to get a numeric representation of this property. In the following example, the
+          temperature entity is not identified by <code>coap://example.org/temp-sensor-1-val</code>
+          directly (wich represents a single temperature measurement, localized in time) but by the
+          URN <code>urn:example:temp-sensor-1-val</code> (time-independent).
+        </p>
+        
+        <pre class="example" title="Thing Description for a temperature sensor">
+{
+  "id": "urn:example:temp_sensor_1",
+  "properties": {
+    "urn:example:temp_sensor_1_val": {
+      "type": "number",
+      "forms": [{
+        "href": "coap://example.org/temp_sensor_1_val"
+      }]
+    }
+  }
+}
+        </pre>
+        
+        <!-- valid TD? No restriction on property label? -->
+        
+        <p>
+          Although the TD presented in this example is a valid TD, it is cumbersome to give distinct IRI
+          to all entities of a TD. Instead, it is possible to define all IRIs in the document as relative
+          to the <code>id</code> of a 'thing'. These IRIs can then be resolved as absolute IRIs by
+          applying the generic URI resolution algorithm [[RFC3986]]. For instance, the relative IRI
+          <code>val</code> would resolve as <code>urn:example:temp_sensor_1/val</code>, in the
+          following example.
+        </p>
+        
+        <pre class="example" title="Thing Description for a temperature sensor (with relative IRI)">
+{
+  "id": "urn:example:temp_sensor_1",
+  "properties": {
+    "val": {
+      "type": "number",
+      "forms": [{
+        "href": "coap://example.org/temp_sensor_1_val"
+      }]
+    }
+  }
+}
+        </pre>
+        
+        <p>
+          The default JSON-LD <a href="http://www.w3.org/ns/td.jsonld">TD context</a> has been defined
+          in such a way that a JSON-LD processor will, by default, interpret all keys for properties,
+          actions and events as relative IRIs if they are plain JSON terms. WoT developers are indeed
+          encouraged to use relative IRIs in TD documents, for the sake of conciseness.
+        </p>
+        
+        <p>
+          The URI resolution algorithm applies to all URIs, which includes all URN namespaces. By
+          default, if a URN namespace does not define any path section, a relative path is appended at
+          the end of the base resource name and represents a distinct resource [[RFC8141]] (Section 4.3).
+          However, according to the same specification, IRI fragments are not a distinctive part of a
+          URN. If <code>urn:example:temp_sensor_1/val</code> is distinct from
+          <code>urn:example:temp_sensor_1</code>, the URN <code>urn:example:temp_sensor_1#val</code>
+          is equivalent to it. For this reason, hash IRIs are discouraged in TD documents.
+        </p>
+        
+        <!-- TODO reference part of a doc? -->
+      </section>
+      
+      <section id="ld-integration">
+        <h3>Linked Data Integration: An Example</h3>
+        
+        <p>
+          In the context of data integration between multiple sources of knowledge, IRIs can be seen as
+          database keys, where each source of knowledge is a database segment. That is, a desired effect
+          when merging the different sources is that joins occur between statements that involve the
+          same IRIs. Here, we provide an example in the domain of Building Automation Systems (BAS),
+          where sensing devices for a large building expose TD documents that are integrated with
+          infrastructure data, represented in RDF.
+        </p>
+        
+        <p>
+          One of the current trends in BAS engineering is to gather technical data on a building at
+          different phases and of different nature under a single Building Information Model (BIM). The
+          design of a BIM is a good use case for RDF and Linked Data, as various experiments conducted
+          by the <a href="https://www.w3.org/community/lbd/">W3C Linked Building Data (LBD) community
+          group</a> show. It is, for instance, a common practice to link data about automation devices
+          with the geometry of the building, geolocation and weather information to optimize energy
+          consumption.
+        </p>
+        
+        <figure id="ld-integration-bas">
+          TODO
+          <figcaption>Linked Data integration of TDs with a BIM.</figcaption>
+        </figure>
+        
+        <p>
+          Let us assume that a BAS includes two devices in the same room, each identified by a GTIN
+          (product code and serial number). One is a temperature sensor and the other is a radiator
+          with digital control. Moreover, information about the geometry of the room and the heating
+          circuit to which it is connected is available. See example below (JSON-LD context omitted).
+        </p>
+        
+        <pre class="example" title="Different knowledge sources in a BIM">
+// temperature sensor TD
+{
+  "id": "urn:epc:...",
+  "@type": "?",
+  "properties": {
+    "temp" : {
+      "@type": "?",
+      "type": "number",
+      "forms": []
+    }
+  }
+}
+
+// radiator control TD
+{
+  "id": "urn:epc:...",
+  "@type": "?",
+  "properties": {
+    "state": {
+      "@type": "?",
+      "writable": true,
+      "type": "boolean",
+      "forms": []
+    }
+  }
+}
+
+// room geometry
+TODO
+
+// heating circuit information
+TODO
+        </pre>
+        
+        <p>
+          The JSON-LD definitions above do not share any identifier. However, as soon as devices are
+          commissioned in a given room, the following statements can be added to the knowledge base.
+          As a result, all entities become interlinked and inference can be applied to the whole
+          knowledge base.
+        </p>
+        
+        <pre class="example" title="Integration statements linking different knowledge sources">
+[{
+  "@id": "urn:epc:",
+  "schema:location": "tag:SODA1R465__ART"
+}, {
+  "@id": "urn:epc:...",
+  "schema:location": "tag:SODA1R465__ART"
+}]
+        </pre>
+        
+        <p>
+          A common practice in BAS engineering is to interact with certain physical world entities as
+          if they were 'virtual' digital devices. For instance, a room can be attached a temperature
+          value, which would be the aggregated measurement of all temperature sensors located in that
+          room. This rule can be captured by logical axioms and inference would lead to
+          <code>tag:...</code> being a instance of the class <code>Thing</code> and having the
+          property <code>temp</code> (see below).
+        </p>
+        
+        <p>
+          Inference can also be used to know to what parts of a BAS newly commissioned devices should
+          interact with. For instance, the knowledge base can contain a rule stating that all
+          temperature-related devices in a room should interact with the boiler serving connected to
+          that specific room via a heating circuit. Semantically, it could expressed as follows: the
+          heating system that includes the boiler <code>urn:...</code> also has
+          <code>urn:epc:...</code> and <code>urn:epc:...</code> as sub-systems (as defined below).
+        </p>
+        
+        <pre class="example" title="Inferred statements">
+[{
+  "@id": "tag:...",
+  "@type": "Thing",
+  "properties": ["urn:epc:.../temp"]
+}, {
+  "@id": "",
+  "ssn:hasSubSystem": ["urn:epc:...", "urn:epc:"]
+}]
+        </pre>
+        
+        <p>
+          These inferred statements could only be inferred from a knowledge base made of links between
+          entities and thus, the proper use of IRIs for 'things' is a necessary condition to the
+          semantic processing of TDs.
+        </p>
+        
+        <p>
+          The BAS example we provide in this document can easily translate in the domain of industry
+          automation (integration with an assembly line description) or city infrastructure management
+          (integration with a city map). In these two domains, <a href="http://hypercat.io/">Hypercat</a>
+          is a standard comparable to and, to some extent, embeddable in the W3C TD model. Integration
+          with external knowledge bases is one of the use cases of Hypercat.
+        </p>
+      </section>
+      
+      <section id="lifecycle-management">
+        <h3>Lifecycle management</h3>
+        
+        <p>TODO</p>
+      </section>
+    </section>
+    
+    <section id='interaction-patterns'>
+      <h2>Design Patterns for Properties, Actions and Events</h2>
+      
+      Theses design patterns are independent from any protocol binding.
+      
+      <section id="stateless-interactions">
+        <h3>Stateless Interactions</h3>
+      </section>
+      
+      <section id="actual-desired-states-interactions">
+        <h3>Actual State vs. Desired State</h3>
+        
+        <p>BACnet, MODBUS</p>
+      </section>
+      
+      <section id="pubsub-interactions">
+        <h3>Publish-subscribe Interactions</h3>
+      </section>
+      
+      <section id="intent-model">
+        <h3>An Intent Model for Unified Interactions</h3>
+      </section>
+    </section>
+    
+    <section id='semantic-api'>
+      <h2>Scripting API and Semantic Annotations</h2>
+      
+      <p>Type and frame queries. Example with intent model, described above</p>
+      <p>Equivalences with rule engines and logic programming</p>
+    </section>
+    
+    <section id='user-vocab'>
+      <h2>Vendor-specific RDF Vocabularies</h2>
+      
+      <p>Alignment with SSN/SOSA?</p>
+      
+      <p>RDFS, Schema.org, OWL</p>
+      <p>Pointers to existing publication guidelines</p>
+    </section>
+    
+  </body>
+</html>

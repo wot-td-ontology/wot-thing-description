@@ -1,0 +1,34 @@
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteBase  /ns/wot-security/
+
+
+# Documents
+
+<Files ~ "wot-security\.rdf$">
+    Header set Content-Type "application/rdf+xml"
+    Header set Content-Disposition "filename= wot-security.rdf"
+    Header set Content-Location "http://www.w3.org/ns/wot-security/wot-security.rdf" env=REDIRECT_redirect
+</Files>
+
+<Files ~ "wot-security\.ttl$">
+    Header set Content-Type "text/turtle"
+    Header set Content-Disposition "filename= wot-security.ttl"
+    Header set Content-Location "http://www.w3.org/ns/wot-security/wot-security.ttl" env=REDIRECT_redirect
+</Files>
+
+# Directory index
+
+RewriteCond  %{REQUEST_URI}  /ns/wot-security/$
+RewriteCond %{HTTP_ACCEPT} !(application/rdf\+xml|text/turtle)
+RewriteRule  ^(.*)$  https://www.w3.org/TR/wot-td-ontology/#wot-security [R=303,env=redirect:1,NE]
+
+RewriteCond  %{REQUEST_URI}  /ns/wot-security/$
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule  ^(.*)$  /ns/wot-security/wot-security.rdf [env=redirect:1]
+
+RewriteCond  %{REQUEST_URI}  /ns/wot-security/$
+RewriteCond %{HTTP_ACCEPT} text/turtle
+RewriteRule  ^(.*)$  /ns/wot-security/wot-security.ttl [env=redirect:1]
+

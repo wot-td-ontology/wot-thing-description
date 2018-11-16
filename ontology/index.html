@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Web of Things (WoT) Ontology</title>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+    <script class='remove'>
+          var respecConfig = {
+              specStatus:     "ED"
+            , processVersion: 2018
+            , shortName:      "wot-thing-description-ontology"
+            , copyrightStart: 2018
+            , noLegacyStyle:  true
+            , inlineCSS:      true
+            , noIDLIn:        true
+            , format:         "markdown"
+            , wg:             "Web of Things Working Group"
+            , wgURI:          "https://www.w3.org/WoT/WG/"
+            , wgPublicList:   "public-wot-wg"
+            , edDraftURI:     "https://wot-td-ontology.github.io/wot-thing-description/ontology/"
+            , githubAPI:      "https://api.github.com/repos/w3c/wot-thing-description"
+            , issueBase:      "https://www.github.com/w3c/wot-thing-description/issues"
+            , editors: [
+                {
+                  name:       "Victor Charpenay"
+                , w3cid:      "XXXXX"
+                , company:    "Siemens AG"
+                , companyURL: "https://www.siemens.com/"
+                }
+              , {
+                  name:       "Maxime Lefrançois"
+                , w3cid:      "50604"
+                , company:    "École Nationale Supérieure des Mines de Saint-Étienne"
+                , url: "http://www.maxime-lefrancois.info/"
+                , companyURL: "https://www.mines-stetienne.fr/"
+                }
+              , {
+                  name:       "María Poveda-Villalón"
+                , w3cid:      "XXXXX"
+                , company:    "Universidad Politecnica de Madrid"
+                , url:        "https://mariapoveda.github.io"
+                , companyURL: "http://www.oeg-upm.net/"
+                }
+              , {
+                  name:       "Lionel Médini"
+                , w3cid:      "XXXXX"
+                , company:    "Université Lyon 1, France"
+                , url:        "https://perso.liris.cnrs.fr/lionel.medini/"
+                , companyURL: "https://www.univ-lyon1.fr/"
+                }
+              ]
+            , localBiblio: {
+                "JSON-SCHEMA-VALIDATION": {
+                  title:    "JSON Schema Validation: A Vocabulary for Structural Validation of JSON"
+                , href:     "https://tools.ietf.org/html/draft-handrews-json-schema-validation-00"
+                , authors: [
+                    "Austin Wright"
+                  , "Henry Andrews"
+                  , "Geraint Luff"
+                  ]
+                , status:   "Internet-Draft"
+                , publisher:  "IETF"
+                }
+              , "JSON-SCHEMA-CORE": {
+                  title:    "JSON Schema: A Media Type for Describing JSON Documents"
+                , href:     "https://tools.ietf.org/html/draft-handrews-json-schema-00"
+                , authors:  [
+                    "Austin Wright"
+                  , "Henry Andrews"
+                  ]
+                , status:    "Internet-Draft"
+                , publisher: "IETF"
+                }
+              , "OPENAPI": {
+                  title:    "OpenAPI Specification: Version 3.0.1"
+                , href:     "https://swagger.io/specification/"
+                , authors:  [
+		    "Darrel Miller"
+                  , "Jason Harmon"
+                  , "Jeremy Whitlock"
+                  , "Kris Hahn"
+                  , "Marsh Gardiner"
+                  , "Mike Ralphson"
+                  , "Rob Dolin"
+                  , "Ron Ratovsky"
+                  , "Tony Tam"
+                  ]
+                , publisher: "OpenAPI Initiative, Linux Foundation"
+                , date: "7 December 2017"
+                }
+              , "SemVer": {
+                  title:    "Semantic Versioning 2.0.0"
+                , href:     "https://semver.org/"
+                , authors:  ["Tom Preston-Werner"]
+                , date: "26 December 2017"
+                }
+              , "MEDIATYPES": {
+                  title:    "Media Types"
+                , href:     "https://www.iana.org/assignments/media-types/media-types.xhtml"
+                , publisher: "IANA"
+                }
+              , "WOT-ARCHITECTURE" : {
+                  title: "Web of Things Architecture"
+                , href: "https://w3c.github.io/wot-architecture/"
+                , authors:  [
+                    "Kazuo Kajimoto"
+                  , "Matthias Kovatsch"
+                  , "Uday Davuluru"
+                  ]
+                , publisher: "W3C"
+                , date: "20 August 2017"
+                }
+              , "WOT-THING-DESCRIPTION" : {
+                  title: "Web of Things (WoT) Thing Description"
+                , href: "https://w3c.github.io/wot-thing-description/"
+                , authors:  [
+                    "Sebastian Kaebisch"
+                  , "Takuki Kamiya"
+                  ]
+                , publisher: "W3C"
+                , date: "21 October 2018"
+                }
+        , "WOT-PROTOCOL-BINDING" : {
+                  title: "Web of Things Protocol Binding Templates"
+                , href: "https://w3c.github.io/wot-binding-templates/"
+                , authors:  [
+                    "Michael Koster"
+                  ]
+                , publisher: "W3C"
+                , date: "12 January 2018"
+                }
+              }
+            , otherLinks: [
+                {
+                  key: "Contributors"
+                , data: [
+                    {
+                      value: "In the GitHub repository"
+                    , href: "https://github.com/w3c/wot-thing-description/graphs/contributors"
+                    }
+                  ]
+                }
+              , {
+                  key: "Repository",
+                  data: [
+                    {
+                      value: "We are on GitHub"
+                    , href: "https://github.com/w3c/wot-thing-description/"
+                    }
+                  , {
+                      value: "File a bug"
+                    , href: "https://github.com/w3c/wot-thing-description/issues"
+                    }
+                  ]
+                }
+              ]
+            };
+    </script>
+<style>
+.example {
+    border-color: #EA1252;
+    background: #FEF11E;
+    counter-increment: example;
+    overflow: auto;
+    clear: both;
+  }
+.todo {
+    background: #ffdddd;
+  }
+</style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
+</head>
+<body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# skos: http://www.w3.org/2004/02/skos/core# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/>. vann: http://purl.org/vocab/vann/ voaf: http://purl.org/vocommons/voaf# td: http://www.w3.org/ns/td#">
+
+  <section id="abstract">
+  <p>
+  This document complements the Web of Things (WoT) Thing Description [[WOT-THING-DESCRIPTION]]. It extends the Thing Description specification with capabilities to inject semantic annotations; specifies a Thing Description Ontology (TD) to describe Thing Descriptions; and provides an algorithm to generate a OWL 2 description of a Thing Description along with its semantic annotations. Alignment to the W3C Semantic Sensor Networks ontology is provided [[vocab-ssn]].
+  </p>
+  </section>
+
+  <section id="sotd">
+  <p>
+  This specification is not intended to reach the W3C recommendation status. Instead, it is intended to become a W3C Group Note companioning the W3C Thing Description recommendation.
+  </p>
+  </section>
+
+  <section id="introduction">
+  <h1>Introduction</h1>
+
+
+
+
+  <p>
+  The namespace for the W3C TD vocabulary as defined in 
+  this document is <a href="http://www.w3.org/ns/td">http://www.w3.org/ns/td</a>. 
+  </p> 
+  <p>
+  Using content negotiation,  this namespace serves either the TD ontology file (Turtle) 
+  or the TD context file (JSON-LD).
+  </p>
+  <p>
+    The suggested prefix for the TD namespace is <code>td</code>.      
+  </p>
+  <p>
+  The security ontology that can be used with the TD 
+  is available at 
+  <a href="https://www.w3.org/ns/wot-security">https://www.w3.org/ns/wot-security</a>. 
+  </p>
+  <p>
+  The data schema ontology that can be used with the TD is 
+  available at 
+  <a href="https://www.w3.org/ns/json-schema">https://www.w3.org/ns/json-schema</a>. 
+  </p>
+
+  <p class="ednote" title="Binding Vocabulary and Prefixes">
+   The TD will reuse existing vocabulary definitions such as for http from the 
+   <a href="http://www.w3.org/2011/http#">http://www.w3.org/2011/http#</a> namespace. In that case the prefix <code>http</code> is used. However, there are prefixes such as
+   <code>coap</code> and <code>mqtt</code> which have no namespace yet. Currently there are efforts to have such namespace representations which will be referenced in the 
+   TD specification in the future. In the meantime,  the [[!WOT-PROTOCOL-BINDING]] provides the list of terms that can be used to specify the protocol metadata in the Thing Description.
+  </p>
+
+
+
+
+  </section>
+
+  <section>
+  <h1>Axiomatization</h1>
+
+  <p>This section introduces the specification for the WoT Ontologies:</p>
+  <ul>
+    <li>The Thing Description (TD) Ontology</li>
+    <li>The Security Ontology</li>
+    <li>The Data Schema Ontology</li>
+  </ul>
+
+  <section>
+    <h1>The Thing Description (TD) Ontology</h1>
+
+    <p>This section introduces the specification for the TD Ontology. This ontology defines terms for the WoT TD Information Model [[WOT-THING-DESCRIPTION]]. It also defines term <code>td:isAbstractionOf</code> to link Thing Descriptions to the physical entities they are abstractions of, and term <code>td:isDescriptionOf</code> to link a Thing Property to some actuatable or observable physical property it is a description of.</p>
+
+    <section>
+    <h1>Namespaces</h1>
+
+      <p style="text-align: center;">
+          The namespace for TD Ontology terms is <span class="repeated" style="font-family: courier;">
+      http://www.w3.org/ns/td#</span>
+      </p>
+      <p style="text-align: center;">
+          The suggested prefix for the TD namespace is <span class="repeated" style="font-family: courier;">
+      td</span>
+      </p>
+      <p style="text-align: center;">
+          The Turtle version of the TD ontology is available at <a href="http://www.w3.org/ns/td/td.ttl">http://www.w3.org/ns/td/td.ttl</a>
+      </p>
+    </section>
+
+    <section id="overview-of-classes-and-properties">
+      <h3>Overview of Classes and Properties</h3>
+      <div id="index-of-classes-and-properties">
+        <div class="azlist">
+          <p>Classes:
+              <a href="#Property">td:Property</a> , 
+          </p>
+        </div>
+        <div class="azlist">
+            <p>Object Properties:
+                <a href="#hasProperty">td:hasProperty</a> , 
+            </p>
+        </div>
+        <div class="azlist">
+            <p>Datatype Properties:
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Things</h3>
+      <p>A TD Thing is the abstraction of one or more physical or virtual entities, which may be Features of Interest, Platforms, or Systems, as defined by the Semantic Sensor Networks Ontology. The TD ontology introduces a semantic annotation <code>td:abstractionFor</code> to link a Thing to each of these entities.</p>
+
+       as defined in the Thing Description may be mapped to different classes in the Semantic Sensor Networks ontology depending on the use case:</p>
+      <ul>
+        <li>A <code>td:Thing</code> may be an avatar for a Feature of Interest, a Sensor, Actuator, or Sampler.</li>
+        <li>A <code>td:Thing</code> may be an avatar for two or more Features of Interest, Sensors, Actuators, or Samplers.</li>
+      </ul>
+
+      <!-- Thing -->
+      <section class="specterm" id="Thing" about="td:Thing" typeof="owl:Class">
+        <h5><a href="#Thing"><code>td:Thing</a></code></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Thing</p>
+        <p><strong>a OWL Class</strong></p>
+
+        <p><em property="rdfs:label">Thing</em> - <span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span> - <span property="rdfs:comment skos:definition"> An abstraction of a physical or virtual entity whose metadata and interfaces are described by a WoT Thing Description. This entity can be an existing device augmented with a Thing Description, a logical component of a device that has a software stack that natively provides Thing Descriptions (see Servient), a local hardware component of a Servient, or a logical entity (e.g., location) that does not directly provide any software stack such as a room or building.</span>
+        </p>
+        <p property="rdfs:comment">
+          Depending on the use case, an instance of <code>td:Thing</code> may also be an instance of one or more of the following classes in [[vocab-ssn]]: <code>sosa:FeatureOfInterest</code>, <code>sosa:Sample</code>, <code>sosa:Sensor</code>, <code>sosa:Actuator</code>, <code>sosa:Sampler</code>, <code>sosa:Platform</code>, <code>ssn:System</code>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Disjoint with</th>
+                    <td>
+                        <span about="td:Thing" rel="owl:disjointWith" resource="td:PropertyResource"><a href="#PropertyResource">td:PropertyResource</a></span>, 
+                        <span about="td:Thing" rel="owl:disjointWith" resource="td:ActionContainer"><a href="#ActionContainer">td:ActionContainer</a></span>, 
+                        <span about="td:Thing" rel="owl:disjointWith" resource="td:EventContainer"><a href="#EventContainer">td:EventContainer</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <!-- avatarOf -->
+      <section class="specterm" id="avatarOr" about="td:avatarOr" typeof="owl:ObjectProperty">
+        <h5><a href="#avatarOr">td:avatarOr</a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#avatarOr</p>
+        <p><strong>a OWL Object Property</strong></p>
+
+        <p class="ednote">
+          naming to be discussed
+        </p>
+
+        <p><em property="rdfs:label">avatarOr</em> - <span property="rdfs:comment skos:definition">Links a <code>td:Thing</code> to some <code>sosa:FeatureOfInterest</code> it is an avatar of.</span>
+        </p>
+        <table>
+          <tbody>
+            <tr>
+                <th>Domain</th>
+                <td><span rel="rdfs:domain" resource="td:Thing"><a href="#Thing">td:Thing</a></span></td>
+            </tr>
+            <tr>
+                <th>Range</th>
+                <td><span rel="rdfs:range" resource="sosa:FeatureOfInterest"><a href="http://www.w3.org/ns/sosa/FeatureOfInterest">sosa:FeatureOfInterest</a></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <p class="ednote">
+        Thing::id is the URI of the Thing.
+      </p>
+
+      <p class="ednote">
+        Thing::security is mapped and defined in the Security module.
+      </p>
+
+      <p class="ednote">
+        Thing::name is mapped to rdfs:label.
+      </p>
+
+      <p class="ednote">
+        Thing::description is mapped to rdfs:comment.
+      </p>
+
+      <!-- hasSupport -->
+      <section class="specterm" id="hasSupport" about="td:hasSupport" typeof="owl:DatatypeProperty">
+        <h5><a href="#hasSupport">td:hasSupport</a></h5>
+      </section>
+
+      <p class="ednote">
+        Thing::created is mapped to dcterms:created.
+      </p>
+
+
+      <p class="ednote">
+        Thing::lastModified is mapped to dcterms:modified (not perfect match).
+      </p>
+
+      <p class="ednote">
+        Thing::base is used to build some local contexts.
+      </p>
+
+      <p class="ednote">
+        Thing::properties is mapped to td:exposesProperty, defined in the Property Resources section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        Thing::actions is mapped to td:exposesAction, defined in the Action Container section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        Thing::events is mapped to td:triggersEvent, defined in the Event Container section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        Thing::link is mapped to td:hasWebLink, defined in the Web Links section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        Thing::securityDefinitions is mapped to td:hasForm, defined in the Links section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        Thing::version cannot be mapped to dcterms:hasVersion (mapping to be discussed)
+      </p>
+    </section>
+
+    <section>
+      <h3>Property Resources</h3>
+
+      <div class="note">
+        <p>In the Thing Description, the semantics of Properties of a Thing may describe several different aspects of a feature of interest:</p>
+        <ul>
+          <li>A single <code>td:PropertyResource</code> may describe the temperature of two different rooms inside a building.</li>
+          <li>A single <code>td:PropertyResource</code> may describe both the temperature and the humidity of a room inside a building.</li>
+          <li>A single <code>td:PropertyResource</code> may describe a history of the  temperature of a room inside a building.</li>
+          <li>Two <code>td:PropertyResource</code> may describe the temperature of a room inside a building with different data schemas: one with two values, <em>cold</em> and <em>hot</em>, and one with a temperature relative to the optimal temperature.</li>
+        </ul>
+        <p>Therefore, and so as not to mix the Thing Description Properties with Properties as defined in the SOSA/SSN Ontology [[vocab-ssn]], the Thing Description Ontology uses a more precise term <em>Property Resource</em> to refer to the Properties of a Web Thing.</p> 
+
+        <p property="rdfs:comment">
+          If the <code>td:Thing</code> is also a <code>sosa:FeatureOfInterest</code> or <code>ssn:System</code>, then the Property Resources of the <code>td:Thing</code> describe the properties of the <code>sosa:FeatureOfInterest</code> or the <code>ssn:System</code>.
+        <p>
+        </p> Depending on the use case, an instance of <code>td:PropertyResource</code> may also be an instance of the following classes in [[vocab-ssn]]: <code>sosa:ObservableProperty</code>, <code>sosa:ActuatableProperty</code>, <code>ssn:Property</code>.
+        </p>
+      </div>
+
+      <!-- PropertyResource -->
+      <section class="specterm" id="PropertyResource" about="td:PropertyResource" typeof="owl:Class">
+        <h5><a href="#PropertyResource">td:PropertyResource</a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#PropertyResource</p>
+        <p><strong>a OWL Class</strong></p>
+
+        <p><em property="rdfs:label">PropertyResource</em> - <span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span> - <span property="rdfs:comment skos:definition"> An Interaction Pattern to read a specific value of a Thing and optionally to write it.</span>
+        </p>
+        <p property="rdfs:comment">
+          Depending on the use case, an instance of <code>td:PropertyResource</code> may also be an instance of the following classes in [[vocab-ssn]]: <code>sosa:ObservableProperty</code>, <code>sosa:ActuatableProperty</code>, <code>ssn:Property</code>.
+        </p>
+        <table>
+            <tbody>
+                  <tr>
+                    <th class="restrictions">Disjoint with</th>
+                    <td>
+                        <span about="td:PropertyResource" rel="owl:disjointWith" resource="td:Thing"><a href="#Thing">td:Thing</a></span>, 
+                        <span about="td:PropertyResource" rel="owl:disjointWith" resource="td:ActionContainer"><a href="#ActionContainer">td:ActionContainer</a></span>, 
+                        <span about="td:PropertyResource" rel="owl:disjointWith" resource="td:EventContainer"><a href="#EventContainer">td:EventContainer</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+
+      <!-- descriptionOf -->
+      <section class="specterm" id="descriptionOf" about="td:descriptionOf" typeof="owl:ObjectProperty">
+        <h5><a href="#descriptionOf">td:descriptionOf</a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#descriptionOf</p>
+        <p><strong>a OWL Object Property</strong></p>
+
+        <p><em property="rdfs:label">descriptionOf</em> - <span property="rdfs:comment skos:definition">Links a <code>td:PropertyResource</code> to an actual physical property of some <code>sosa:FeatureOfInterest</code> that this <code>td:PropertyResource</code> describes.</span>
+        </p>
+        <table>
+            <tbody>
+              <tr>
+                  <th>Domain</th>
+                  <td><span rel="rdfs:domain" resource="td:PropertyResource"><a href="#PropertyResource">td:PropertyResource</a></span></td>
+              </tr>
+              <tr>
+                  <th>Range</th>
+                  <td><span rel="rdfs:range" resource="ssn:Property"><a href="http://www.w3.org/ns/ssn/Property">ssn:Property</a></span></td>
+              </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <p class="ednote">
+        InteractionPattern::forms is mapped to td:accessibleUsing, defined in the Forms section. (naming to be discussed)
+      </p>
+
+      <p class="ednote">
+        InteractionPattern::title is mapped to rdfs:label
+      </p>
+
+
+      <p class="issue" title="RDF description of observable">
+          Querying a TD repo for observable properties would be a lot more efficient if <code>observable</code> was mapped to classes instead of a DataProperty. Why not defining sub-classes of PropertyResource: <code>td:ObservableProperty</code>, and  <code>td:NotObservableProperty</code>.
+      </p>
+
+      [...] 
+
+    </section>
+    <section>
+      <h3>Action Container</h3>
+
+      <div class="note">
+        <p>In the Thing Description, Actions of a Thing describe different aspects of a feature of interest:</p>
+        <ul>
+          <li>A single <code>td:PropertyResource</code> may describe the temperature of two different rooms inside a building.</li>
+          <li>A single <code>td:PropertyResource</code> may describe both the temperature and the humidity of a room inside a building.</li>
+          <li>A single <code>td:PropertyResource</code> may describe a history of the  temperature of a room inside a building.</li>
+          <li>Two <code>td:PropertyResource</code> may describe the temperature of a room inside a building with different data schemas: one with two values, <em>cold</em> and <em>hot</em>, and one with a temperature relative to the optimal temperature.</li>
+        </ul>
+        <p>Therefore, and so as not to mix the Thing Description Properties with Properties as defined in the SOSA/SSN Ontology [[vocab-ssn]], the Thing Description Ontology uses a more precise term <em>Property Resource</em> to refer to the Properties of a Web Thing.</p> 
+      </div>
+
+
+
+      [...] 
+
+
+      <p class="issue" title="RDF description of safe">
+          Querying a TD repo for safe actions would be a lot more efficient if <code>safe</code> was mapped to classes instead of a DataProperty. Why not defining sub-classes of ActionContainer: <code>td:SafeAction</code>, and  <code>td:NotSafeAction</code>.
+      </p>
+      
+      
+
+      <p class="issue" title="RDF description of idempotent">
+          Querying a TD repo for idempotent actions would be a lot more efficient if <code>idempotent</code> was mapped to classes instead of a DataProperty. Why not defining sub-classes of ActionContainer: <code>td:IdempotentAction</code>, and  <code>td:NotIdempotentAction</code>.
+      </p>
+      
+      
+
+      
+    </section>
+
+    <section>
+      <h3>Event Container</h3>
+
+      [...] 
+      
+    </section>
+
+
+
+    <section>
+      <h3>Forms</h3>
+      <p class="issue" title="RDF Resources for Content Types">
+        Need to choose RDF representation of the values of the <code>contentType</code> key in a Form. Option 1: a URN Namespace for Content Types; Option 2: a Datatype for Content Types
+      </p>
+
+      <p class="ednote">
+        Form::contentType is mapped to td:hasContentType, no domain?
+      </p>
+
+      <p class="issue" title="RDF Resources for op Types">
+          Need to define RDF resources for 
+          <code>"readproperty"</code>,
+          <code>"writeproperty"</code>,
+          <code>"observeproperty"</code>,
+          <code>"invokeaction"</code>,
+          <code>"subscribeevent"</code>, and
+          <code>"unsubscribeevent"</code>.
+      </p>
+
+      <p class="ednote">
+        Form::contentType is mapped to td:has, no domain?
+      </p>
+
+      <p class="issue" title="RDF Resources for op Types">
+          Need to define RDF resources for 
+          <code>"readproperty"</code>,
+          <code>"writeproperty"</code>,
+          <code>"observeproperty"</code>,
+          <code>"invokeaction"</code>,
+          <code>"subscribeevent"</code>, and
+          <code>"unsubscribeevent"</code>.
+          <br/>
+          Why not defining sub-classes of Form: <code>td:ReadPropertyForm</code> etc. ?
+      </p>
+    </section>
+    <!-- Form -->
+    <section class="specterm" id="Form" about="td:Form" typeof="owl:Class">
+        <h5><a href="#Form">td:Form</a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Form</p>
+        <p><strong>a OWL Class</strong></p>
+
+        <em property="rdfs:label">Form</em> - <span property="rdfs:comment skos:definition"><span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span></span>
+        <br>
+    </section>
+  </section>
+
+
+  <section id="algorithm">
+  <h1>Algorithm to deserialize TD to RDF</h1>
+
+  <p>This section defines an algorithm for programmatic deserialization of a JSON TD document to an RDF dataset.</p>
+
+  <p class="todo">Could reuse style of <a href="https://www.w3.org/TR/json-ld-api/#h3_deserialize-json-ld-to-rdf-algorithm">JSON-LD algorithm</a></p> 
+
+
+  <h2>Overview</h2>
+
+  <p>The algorithm consists of two distinct steps:</p>
+
+  <ol>
+    <li>Transformation of the JSON TD into a JSON-LD document</li>
+    <li>Application of the standard JSON-LD 1.0 algorithm <em>Deserialize JSON-LD to RDF algorithm</em></li>
+  </ol>
+
+  <h2>Algorithm</h2>
+
+  <p><span class="rfc2119-assertion" id="td-context">
+  The root object of a Thing Description instance MAY include the
+  <code>@context</code> key from JSON-LD 1.1 with the value URI of 
+  the Thing description context file <code>http://www.w3.org/ns/td</code>.
+  </span></p>
+
+  </section>
+
+
+  <section id="movedfromtd">
+  <h1>Bits and Pieces moved here from TD</h1>
+
+<pre class="example">
+{  
+    "@context": "http://www.w3.org/ns/td",
+    ...
+}
+</pre>
+
+  <p class="ednote">
+  <code>http://www.w3.org/ns/td</code> uses content negotiation to return the
+  context file. Thus, it must be fetched with an <code>Accept</code> header set
+  to <code>application/ld+json</code>.
+  </p>
+
+  <p><span class="rfc2119-assertion" id="td-context-jsonld">
+  When a Thing Description instance is processed and interpreted by a
+  JSON-LD 1.1 processor the <code>@context</code> field
+  MUST be present</span> 
+  (see also Section <a href="#note-jsonld-processing" class="sec-ref">JSON-LD 1.1 Processing</a>). 
+  </p>
+
+  <p><span class="rfc2119-assertion" id="td-additional-contexts">
+  When a single Thing Description instance involves several contexts, 
+  additional namespaces with prefixes MUST be appended to the 
+  <code>@context</code> array structure.</span> 
+  This option proves relevant if one wants to extend the existing 
+  Thing Description context without modifying it. For instance:
+  </p>
+<pre class="example">
+{
+    "@context": ["http://www.w3.org/ns/td",
+                {"iot": "http://iotschema.org/"}],
+    ...
+}
+</pre>
+
+
+
+    The Thing Description instance needs to be transformed
+  into valid JSON-LD first.  
+  In terms of JSON-LD 1.1 serialization, 
+  the open-world assumption of RDF semantic processing requires vocabulary terms
+  with default values to be always present explicitly in the instances. 
+  Example 2 shows the same TD in a JSON-LD 1.1 serializiation representing
+  exactly the same information as in Example 1; however, default values
+  have been filled in.
+  </p>
+<pre id="thing-description-as-json-ld-1-1-serialization" 
+     class="example" title="Thing Description as JSON-LD 1.1 Serializiation">
+{
+    "@context": "http://www.w3.org/ns/td",
+    "id": "urn:dev:wot:com:example:servient:lamp",
+    "name": "MyLampThing",
+    "securityDefinitions": {
+        "basic_sc": {"scheme": "basic", "in": "header"}
+    },
+    "security": ["basic_sc"],
+    "properties": {
+        "status": {
+            "readOnly": false,
+            "observable": false,
+            "type": "string",
+            "forms": [{
+                "href": "https://mylamp.example.com/status",
+                "http:methodName": "GET",
+                "contentType": "application/json"
+            }]
+        }
+    },
+    "actions": {
+        "toggle": {
+            "forms": [{
+                "href": "https://mylamp.example.com/toggle",
+                "http:methodName": "POST",
+                "contentType": "application/json"
+            }]
+        }
+    },
+    "events": {
+        "overheating": {
+            "data": {"type": "string"},
+            "forms": [{
+                "href": "https://mylamp.example.com/oh",
+                "subprotocol": "longpoll",
+                "contentType": "application/json"
+            }]
+        }
+    }
+}
+ </pre>
+
+
+
+
+Thing serialization
+
+
+Equivalent to example 2:
+
+
+  <p>Alternatively, the same example can be written instead to 
+  explicitly include the (semantic) keys used by JSON-LD 1.1 
+  (<code>@context</code> and <code>@type</code>):
+  </p>
+<pre class="example">
+{
+    "@context": "http://www.w3.org/ns/td",
+    "@type": "Thing",
+    "id": "urn:dev:wot:com:example:servient:myThing",
+    "name": "MyThing",
+    "description": "Additional (human) readable information of the Thing.",
+    "support": "https://servient.example.com/contact",
+    "securityDefinitions": {...},
+    "security": [...],
+    "base": "https://servient.example.com/",
+    "lastModified" : "2018-11-15T09:12:43.124Z",
+    "created" : "2018-11-14T19:10:23.824Z",
+    "version" : {...},
+    "properties": {...},
+    "actions": {...},
+    "events": {...},
+    "links": [...]
+}
+</pre>
+
+
+<h4>Property serialization</h4>
+
+
+  <p><span class="rfc2119-assertion" id="td-property-semantic">
+  Similar to the case at the <code>Thing</code> level,
+  properties MAY have additional semantic annotations based on 
+  JSON-LD 1.1 keywords.
+  </span></p>
+
+  <p><span class="rfc2119-assertion" id="td-property-defaults">
+  When a Thing Description instance is processed and interpreted by 
+  a JSON-LD 1.1 processor, 
+  each <code>property</code> MUST contain the vocabulary terms 
+  <code>observable</code> and <code>readOnly</code> due to the 
+  <a href="https://en.wikipedia.org/wiki/Open-world_assumption">open-world assumption</a>
+  of Linked Data.
+  </span>
+  This assumption means that if a Linked Data model of a Thing Description
+  instance were to omit these vocabulary terms,
+  then the interpreter would not be able to make any assumptions
+  about their actual value. 
+  </p>
+
+  <p>
+  A snippet of a JSON-LD 1.1 processable TD serialization including
+  semantic annotations and the
+  default values of <code>observable</code> and <code>readOnly</code> 
+  based on the class <a href="#property" class="sec-ref"><code>Property</code></a>
+  is given as follows:
+  </p>
+<pre class="example">
+    ...
+    "properties": {
+        "on": {
+            "@type": "iot:SwitchToggle",
+            "title": "On/Off",
+            "readOnly": true,
+            "observable": false,
+            "type": "boolean",
+            "forms": [...]
+        },
+        "status": {
+            "readOnly": true,
+            "observable": false,
+            "type": "object",
+            "properties": {
+                "brightness": {
+                    "@type": "iot:CurrentLevel",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 100.0
+                },
+                "rgb": {
+                    "@type": "iot:rgbData",
+                    "type": "array",
+                    "items" : {
+                        "type" : "number",
+                        "minimum": 0,
+                        "maximum": 255
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                }
+            },
+            "required": ["brightness","rgb"],
+            "forms": [...]
+        }
+    }
+    ...
+</pre>
+
+<h4>Action serialization</h4>
+
+  <p><span class="rfc2119-assertion" id="td-action-semantic">
+  Definitions within the <code>actions</code> field
+  MAY have additional semantic annotations based on JSON-LD 1.1 keywords.
+  </span></p>
+
+
+
+<h4>Event serialization</h4>
+
+
+  <p><span class="rfc2119-assertion" id="td-event-semantic">
+  Definitions within the <code>events</code> field
+  MAY have additional semantic anotations based on JSON-LD 1.1 keywords.
+  </span></p>
+
+
+<h4>Forms</h4>
+
+
+
+  <p><span class="rfc2119-assertion" id="td-form-contenttype">
+  When a Thing Description instance is processed and interpreted 
+  by a JSON-LD 1.1 processor, 
+  each <code>forms</code> (array) entry 
+  MUST contain a <code>contentType</code> 
+  due to the
+  <a href="https://en.wikipedia.org/wiki/Open-world_assumption">open-world assumption</a>
+  of Linked Data.
+  </span>
+  This assumption means that if a Linked Data model of a Thing Description
+  instance were to omit these vocabulary terms,
+  then the interpreter would not be able to make any assumptions
+  about their actual value.
+  </p>
+
+<h4>Interpretation of Mediatype</h4>
+
+  <p><span class="rfc2119-assertion" id="td-media-type">
+  The media type <code>application/td+json</code>
+  MUST be also associated with the JSON-LD context 
+  <code>http://www.w3.org/ns/td</code>.
+  </span>
+  That means that this media type can also be used for contextual  
+  identification of the vocabulary within a (simplified) TD instance 
+  that may omit the <code>@context</code> key term.
+  </p>
+
+<h4> JSON-LD serializatino</h4>
+
+
+  <p>To interpret the semantic meaning of a Thing Description
+  in terms of RDF triples, 
+  a Thing Description instance first requires a valid JSON-LD 1.1 
+  representation based on this Thing Description specification. 
+  Then this representation can be passed to a JSON-LD 1.1 processor.
+  </p>
+
+  <p><!-- The following is not marked as a testable assertion because it 
+          simply says the next three are assertions.
+          The subassertions have been reworded so they can be understood 
+          independently as referring to preprocessing.
+          This is why "must" is in lower case.  -->
+  The following pre-processing steps of a Thing Description instance 
+  must be executed before starting JSON-LD 1.1 processing:
+  <ul>
+  <li><span class="rfc2119-assertion" id="td-jsonld-preprocessing-context">
+     Before starting JSON-LD 1.1 processing of a Thing Description instance,
+     there MUST be a <code>@context</code> key from JSON-LD 1.1 as defined 
+     in Section 
+     <a href="#sec-thing-as-a-whole-json"></a>.
+  </span></li>
+  <li><span class="rfc2119-assertion" id="td-jsonld-preprocessing-prefix">
+     Before starting JSON-LD 1.1 processing of a Thing Description instance,
+     all external vocabulary terms used in the Thing Description MUST 
+     provide their context URIs as prefix or within the <code>@context</code>
+     field.
+  </span></li>
+  <li><span class="rfc2119-assertion" id="td-jsonld-preprocessing-defaults">
+     Before starting JSON-LD 1.1 processing of a Thing Description instance,
+     all mandatory vocabulary terms as defined in Section
+     <a href="#sec-vocabulary-definition"></a> that are missing from the instance
+     MUST be inserted explicitly with their default value.
+  </span></li>
+  </ul>
+  </p>
+
+  <!-- FIX: Actually, the examples in the next section
+       are not that good because they
+       show semantic annotation in the "output" that is not in the "input"!
+       So I have redirected this to examples 1 and 2.
+  -->
+  <p>
+  Section <a href="#introduction"></a>
+  shows an example of how the input and output of such
+  preprocessing would appear.
+  </p>
+
+
+  <p>
+  To validate the semantic meaning and follow references to external 
+  context vocabulary terms (e.g., iot.schema.org), use of JSON-LD or RDF-based  
+  tools and libraries is highly recommended 
+  as explained in the next sub-section. 
+  </p>
+
+
+<h4>equivalent to example 18 </h4>
+
+
+
+<pre class="example" title="MyLampThing with semantic annotations based on a valid JSON-LD 1.1 representation">
+{
+    "@context": ["http://www.w3.org/ns/td", 
+        {"iot": "http://iotschema.org/"}],
+    "@type" : "Thing",
+    "id": "urn:dev:wot:com:example:servient:lamp",
+    "name": "MyLampThing",
+    "description" : "MyLampThing uses JSON-LD 1.1 serialization",
+    "securityDefinitions": {"psk_sc":{"scheme": "psk"}},
+    "security": ["psk_sc"],
+    "properties": {
+        "status": {
+            "@type" : "iot:SwitchStatus",
+            "description" : "Shows the current status of the lamp",
+            "readOnly": true,
+            "observable": false,
+            "type": "string",
+            "forms": [{
+                "href": "coaps://mylamp.example.com/status",
+                "contentType": "application/json"
+            }]
+        }
+    },
+    "actions": {
+        "toggle": {
+            "@type" : "iot:SwitchStatus",
+            "description" : "Turn on or off the lamp",
+            "forms": [{
+                "href": "coaps://mylamp.example.com/toggle",
+                "contentType": "application/json"
+            }]
+        }
+    },
+    "events": {
+        "overheating": {
+            "@type" : "iot:TemperatureAlarm",
+            "description" : "Lamp reaches a critical temperature (overheating)",
+            "data": {"type": "string"},
+            "forms": [{
+                "href": "coaps://mylamp.example.com/oh",
+                "contentType": "application/json"
+            }]
+        }
+    }
+}
+</pre>
+
+
+  </section>
+
+
+
+
+  <section id="example" class="appendix">
+  <h1>Complete Examples</h1>
+  
+    <section>
+    <h1>Example 1</h1>
+    
+    </section>
+
+    <section>
+    <h1>Example 2</h1>
+    
+    </section>
+  </section>
+
+  <section id="acknowledgements" class="appendix normative">
+  <h1>Acknowledgements</h1>
+  </section>
+
+  <section id="changes" class="appendix">
+  <h1>Change History</h1>
+  </section>
+
+
+
+  <section id="sec-security-consideration">
+  <h4>Security and Privacy Considerations</h4>
+  
+  <p class="ednote">
+  Complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration
+">https://w3c.github.io/wot-thing-description/
+#sec-security-consideration</a>. First few sentences of this section are copied from the TD spec.
+  </p>
+
+
+  <p>
+  In general the security measures taken to protect a WoT 
+  system will depend on the threats and attackers that system
+  may face and the value of the assets needs to protect.
+  A detailed discussion of security and privacy considerations for the Web of Things,
+  including a threat model that can be adapted to various circumstances, is
+  presented in the informative document [[!WOT-SECURITY-CONSIDERATIONS]].  
+  </p>
+  <p>
+  This section complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration">Section 7</a> in [[WOT-TD]].
+</p>
+    <section id="sec-security-consideration-context">
+    <h5>Context Dereferencing Privacy Risk</h5>
+        <p>Deferencing the vocabulary files given in the <code>@context</code>
+            field of any JSON-LD document can be a privacy risk.
+            In the case of the WoT, an attacker can observe the network
+            traffic produced by such deferences and can use the metadata
+            of the dereference, such as the destination IP address,
+            to infer information about the device especially if domain-specific
+            vocabularies are used.  This is a risk even if the connection
+            is encrypted, and is related to DNS privacy leaks.
+        </p>
+        <dl><dt>Mitigation:</dt><dd>
+            Avoid actual dereferencing of vocabulary files.
+            Vocabulary files should be cached whenever possible.
+            Ideally they would be made immutable, built into the interpreting device,
+            and not derefenced at all,
+            with the URI in the <code>@context</code> field serving only as 
+            an identifier of the (known) vocabulary. 
+            This requires the use of strict version control, as updates
+            should use a new URI to ensure that existing URIs can refer to 
+            immutable data.
+            Use well-known standard vocabulary files whenever possible to
+            improve the chances that the context file will be available locally
+            to systems interpreting the metadata in a Thing Description.
+        </dd></dl>
+     </section>
+   </section>
+
+
+
+
+</body>
+</html>
