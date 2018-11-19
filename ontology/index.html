@@ -187,10 +187,6 @@
 
   <section id="introduction">
   <h1>Introduction</h1>
-
-
-
-
   <p>
   The namespace for the W3C TD vocabulary as defined in 
   this document is <a href="http://www.w3.org/ns/td">http://www.w3.org/ns/td</a>. 
@@ -215,9 +211,7 @@
 
   <p class="ednote" title="Binding Vocabulary and Prefixes">
    The TD will reuse existing vocabulary definitions such as for http from the 
-   <a href="http://www.w3.org/2011/http#">http://www.w3.org/2011/http#</a> namespace. In that case the prefix <code>http</code> is used. However, there are prefixes such as
-   <code>coap</code> and <code>mqtt</code> which have no namespace yet. Currently there are efforts to have such namespace representations which will be referenced in the 
-   TD specification in the future. In the meantime,  the [[!WOT-PROTOCOL-BINDING]] provides the list of terms that can be used to specify the protocol metadata in the Thing Description.
+   <a href="http://www.w3.org/2011/http#">http://www.w3.org/2011/http#</a> namespace. In that case the prefix <code>http</code> is used. However, there are prefixes such as <code>coap</code> and <code>mqtt</code> which have no namespace yet. Currently there are efforts to have such namespace representations which will be referenced in this specification in the future. In the meantime,  the [[!WOT-PROTOCOL-BINDING]] provides the list of terms that can be used to specify the protocol metadata in the Thing Description.
   </p>
 
 
@@ -256,9 +250,9 @@
       </p>
     </section>
 
-    <section id="overview-of-classes-and-properties">
+    <section id="TDoverview">
       <h3>Overview of Classes and Properties</h3>
-      <div id="index-of-classes-and-properties">
+      <div>
         <div class="azlist">
           <p>Classes:
               <a href="#Property">td:Property</a> , 
@@ -280,7 +274,7 @@
       <h3>Things</h3>
       <p>A TD Thing is the abstraction of one or more physical or virtual entities, which may be Features of Interest, Platforms, or Systems, as defined by the Semantic Sensor Networks Ontology. The TD ontology introduces a semantic annotation <code>td:abstractionFor</code> to link a Thing to each of these entities.</p>
 
-       as defined in the Thing Description may be mapped to different classes in the Semantic Sensor Networks ontology depending on the use case:</p>
+      <p>Depending on the use case, a TD Thing as defined in the Thing Description may be mapped to different classes in the Semantic Sensor Networks ontology depending on the use case:</p>
       <ul>
         <li>A <code>td:Thing</code> may be an avatar for a Feature of Interest, a Sensor, Actuator, or Sampler.</li>
         <li>A <code>td:Thing</code> may be an avatar for two or more Features of Interest, Sensors, Actuators, or Samplers.</li>
@@ -288,7 +282,7 @@
 
       <!-- Thing -->
       <section class="specterm" id="Thing" about="td:Thing" typeof="owl:Class">
-        <h5><a href="#Thing"><code>td:Thing</a></code></h5>
+        <h5><a href="#Thing"><code>td:Thing</code></a></h5>
         <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Thing</p>
         <p><strong>a OWL Class</strong></p>
 
@@ -313,7 +307,7 @@
 
       <!-- avatarOf -->
       <section class="specterm" id="avatarOr" about="td:avatarOr" typeof="owl:ObjectProperty">
-        <h5><a href="#avatarOr">td:avatarOr</a></h5>
+        <h5><a href="#avatarOr"><code>td:avatarOf</code></a></h5>
         <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#avatarOr</p>
         <p><strong>a OWL Object Property</strong></p>
 
@@ -321,7 +315,7 @@
           naming to be discussed
         </p>
 
-        <p><em property="rdfs:label">avatarOr</em> - <span property="rdfs:comment skos:definition">Links a <code>td:Thing</code> to some <code>sosa:FeatureOfInterest</code> it is an avatar of.</span>
+        <p><em property="rdfs:label">avatarOf</em> - <span property="rdfs:comment skos:definition">Links a <code>td:Thing</code> to some <code>sosa:FeatureOfInterest</code> it is an avatar of.</span>
         </p>
         <table>
           <tbody>
@@ -355,7 +349,7 @@
 
       <!-- hasSupport -->
       <section class="specterm" id="hasSupport" about="td:hasSupport" typeof="owl:DatatypeProperty">
-        <h5><a href="#hasSupport">td:hasSupport</a></h5>
+        <h5><a href="#hasSupport"><code>td:hasSupport</code></a></h5>
       </section>
 
       <p class="ednote">
@@ -397,7 +391,12 @@
     </section>
 
     <section>
-      <h3>Property Resources</h3>
+      <h3>Interaction Patterns</h3>
+      <p></p>
+    </section>
+
+    <section>
+      <h3>Property</h3>
 
       <div class="note">
         <p>In the Thing Description, the semantics of Properties of a Thing may describe several different aspects of a feature of interest:</p>
@@ -412,8 +411,7 @@
         <p property="rdfs:comment">
           If the <code>td:Thing</code> is also a <code>sosa:FeatureOfInterest</code> or <code>ssn:System</code>, then the Property Resources of the <code>td:Thing</code> describe the properties of the <code>sosa:FeatureOfInterest</code> or the <code>ssn:System</code>.
         <p>
-        </p> Depending on the use case, an instance of <code>td:PropertyResource</code> may also be an instance of the following classes in [[vocab-ssn]]: <code>sosa:ObservableProperty</code>, <code>sosa:ActuatableProperty</code>, <code>ssn:Property</code>.
-        </p>
+        <p>Depending on the use case, an instance of <code>td:PropertyResource</code> may also be an instance of the following classes in [[vocab-ssn]]: <code>sosa:ObservableProperty</code>, <code>sosa:ActuatableProperty</code>, <code>ssn:Property</code>.</p>
       </div>
 
       <!-- PropertyResource -->
@@ -481,7 +479,7 @@
 
     </section>
     <section>
-      <h3>Action Container</h3>
+      <h3>Action</h3>
 
       <div class="note">
         <p>In the Thing Description, Actions of a Thing describe different aspects of a feature of interest:</p>
@@ -515,7 +513,7 @@
     </section>
 
     <section>
-      <h3>Event Container</h3>
+      <h3>Event</h3>
 
       [...] 
       
@@ -524,7 +522,7 @@
 
 
     <section>
-      <h3>Forms</h3>
+      <h3>Form</h3>
       <p class="issue" title="RDF Resources for Content Types">
         Need to choose RDF representation of the values of the <code>contentType</code> key in a Form. Option 1: a URN Namespace for Content Types; Option 2: a Datatype for Content Types
       </p>
@@ -558,16 +556,646 @@
           <br/>
           Why not defining sub-classes of Form: <code>td:ReadPropertyForm</code> etc. ?
       </p>
+      <!-- Form -->
+      <section class="specterm" id="Form" about="td:Form" typeof="owl:Class">
+          <h5><a href="#Form"><code>td:Form</code></a></h5>
+          <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Form</p>
+          <p><strong>a OWL Class</strong></p>
+
+          <em property="rdfs:label">Form</em> - <span property="rdfs:comment skos:definition"><span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span></span>
+          <br>
+      </section>
     </section>
-    <!-- Form -->
-    <section class="specterm" id="Form" about="td:Form" typeof="owl:Class">
-        <h5><a href="#Form">td:Form</a></h5>
-        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Form</p>
+
+
+    <section>
+      <h3>Link</h3>
+    </section>    
+
+    <section>
+      <h3>Versioning</h3>
+    </section>    
+  </section>
+
+
+  <section>
+    <h1>The Data Schema Ontology</h1>
+
+    <p>This section introduces the specification for the Data Schema Ontology. This ontology defines terms for the WoT Data Schema Vocabulary Definition Information Model [[WOT-THING-DESCRIPTION]].</p>
+
+    <section>
+    <h1>Namespaces</h1>
+
+      <p style="text-align: center;">
+          The namespace for Data Schema Ontology terms is <span class="repeated" style="font-family: courier;">
+      http://www.w3.org/ns/json-schema#</span>
+      </p>
+      <p style="text-align: center;">
+          The suggested prefix for the TD namespace is <span class="repeated" style="font-family: courier;">
+      jsonschema</span>
+      </p>
+      <p style="text-align: center;">
+          The Turtle version of the TD ontology is available at <a href="http://www.w3.org/ns/json-schema/json-schema.ttl">http://www.w3.org/ns/json-schema/json-schema.ttl</a>
+      </p>
+    </section>
+
+    <section id="JSONSCHEMAoverview">
+      <h3>Overview of Classes and Properties</h3>
+      <div>
+        <div class="azlist">
+          <p>Classes:
+              <a href="#JSONSCHEMAArraySchema">jsonschema:ArraySchema</a> , 
+              <a href="#JSONSCHEMABooleanSchema">jsonschema:BooleanSchema</a> , 
+              <a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a> , 
+              <a href="#JSONSCHEMAIntegerSchema">jsonschema:IntegerSchema</a> , 
+              <a href="#JSONSCHEMANumberSchema">jsonschema:NumberSchema</a> , 
+              <a href="#JSONSCHEMAObjectSchema">jsonschema:ObjectSchema</a> , 
+              <a href="#JSONSCHEMAStringSchema">jsonschema:StringSchema</a>
+          </p>
+        </div>
+        <div class="azlist">
+            <p>Object Properties:
+                <a href="#JSONSCHEMAitems">jsonschema:items</a> , 
+                <a href="#JSONSCHEMAproperties">jsonschema:properties</a> 
+            </p>
+        </div>
+        <div class="azlist">
+            <p>Datatype Properties:
+                <a href="#JSONSCHEMAconst">jsonschema:const</a> , 
+                <a href="#JSONSCHEMAenum">jsonschema:enum</a> , 
+                <a href="#JSONSCHEMAunit">jsonschema:unit</a> , 
+                <a href="#JSONSCHEMAmaxItems">jsonschema:maxItems</a> , 
+                <a href="#JSONSCHEMAmaximum">jsonschema:maximum</a> , 
+                <a href="#JSONSCHEMAminItems">jsonschema:minItems</a> , 
+                <a href="#JSONSCHEMAminimum">jsonschema:minimum</a> , 
+                <a href="#JSONSCHEMArequired">jsonschema:required</a> , 
+                <a href="#JSONSCHEMAreadOnly">jsonschema:readOnly</a> , 
+                <a href="#JSONSCHEMAwriteOnly">jsonschema:writeOnly</a> , 
+                <a href="#JSONSCHEMAtype">jsonschema:type</a> 
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>DataSchema</h3>
+
+      <section class="specterm" id="JSONSCHEMADataSchema" about="jsonschema:DataSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMADataSchema"><code>jsonschema:DataSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#DataSchema</p>
         <p><strong>a OWL Class</strong></p>
 
-        <em property="rdfs:label">Form</em> - <span property="rdfs:comment skos:definition"><span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span></span>
-        <br>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition"> $comment</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Restrictions</th>
+                    <td>
+                      <span about="jsonschema:DataSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMADataSchema1]"></span>
+                      <span about="[_:JSONSCHEMADataSchema1]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMADataSchema1]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMADataSchema1]" property="owl:allValuesFrom" resource="http://www.w3.org/2001/XMLSchema#string"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></span>
+                      <br>
+                      <span about="jsonschema:DataSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMADataSchema2]"></span>
+                      <span about="[_:JSONSCHEMADataSchema2]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMADataSchema2]" rel="owl:onProperty" resource="jsonschema:const"><a href="#JSONSCHEMAconst">jsonschema:const</a></span>
+                      <span about="[_:JSONSCHEMADataSchema2]" property="owl:allValuesFrom" resource="http://www.w3.org/2000/01/rdf-schema#Literal"><em><b>ONLY</b></em> <a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></span>
+                      <br>
+                      <span about="jsonschema:DataSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMADataSchema3]"></span>
+                      <span about="[_:JSONSCHEMADataSchema3]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMADataSchema3]" rel="owl:onProperty" resource="jsonschema:enum"><a href="#JSONSCHEMAenum">jsonschema:enum</a></span>
+                      <span about="[_:JSONSCHEMADataSchema3]" property="owl:allValuesFrom" resource="http://www.w3.org/2000/01/rdf-schema#Literal"><em><b>ONLY</b></em> <a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAtype" about="jsonschema:type" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAtype"><code>jsonschema:type</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#type</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+
+        <p><em property="rdfs:label">type</em> - <span property="rdfs:comment skos:definition">Assignment of JSON-based data types compatible with JSON Schema (one of boolean, integer, number, string, object, array, or null).</span>
+        </p>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAconst" about="jsonschema:const" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAconst"><code>jsonschema:const</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#const</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">const</em> - <span property="rdfs:comment skos:definition">Provides a constant value.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:const" rel="rdfs:range" resource="rdfs:Literal"><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAunit" about="jsonschema:unit" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAunit"><code>jsonschema:unit</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#unit</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">unit</em> - <span property="rdfs:comment skos:definition">Provides unit information that is used, e.g., in international science, engineering, and business.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:unit" rel="rdfs:range" resource="rdfs:Literal"><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAenum" about="jsonschema:enum" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAenum"><code>jsonschema:enum</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#enum</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">enum</em> - <span property="rdfs:comment skos:definition">Restricted set of values provided as an array.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:enum" rel="rdfs:range" resource="rdfs:Literal"><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAreadOnly" about="jsonschema:readOnly" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAreadOnly"><code>jsonschema:readOnly</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#readOnly</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">readOnly</em> - <span property="rdfs:comment skos:definition">Boolean value that indicates whether a property interaction / value is read only (=true) or not (=false)</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:readOnly" rel="rdfs:range" resource="xsd:string"><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAwriteOnly" about="jsonschema:writeOnly" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAwriteOnly"><code>jsonschema:writeOnly</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#writeOnly</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">writeOnly</em> - <span property="rdfs:comment skos:definition">Boolean value that indicates whether a property interaction / value is write only (=true) or not (=false)</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:writeOnly" rel="rdfs:range" resource="xsd:string"><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
     </section>
+
+
+    <section>
+      <h3>BooleanSchema</h3>
+      <section class="specterm" id="JSONSCHEMABooleanSchema" about="jsonschema:BooleanSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMABooleanSchema"><code>jsonschema:BooleanSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#BooleanSchema</p>
+        <p><strong>a OWL Class</strong></p>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition">A JSON boolean value specification ("type": "boolean").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:BooleanSchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMABooleanSchema0]"></span>
+                      <span about="[_:JSONSCHEMABooleanSchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMABooleanSchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMABooleanSchema0]" property="owl:hasValue" content="boolean"><em><b>HAS VALUE</b></em> "boolean"</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+    </section>
+
+
+    <section>
+      <h3>String Schema</h3>
+      <section class="specterm" id="JSONSCHEMAStringSchema" about="jsonschema:StringSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMAStringSchema"><code>jsonschema:StringSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#StringSchema</p>
+        <p><strong>a OWL Class</strong></p>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition"> A JSON object specification ("type": "string").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:StringSchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMAStringSchema0]"></span>
+                      <span about="[_:JSONSCHEMAStringSchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAStringSchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMAStringSchema0]" property="owl:hasValue" content="string"><em><b>HAS VALUE</b></em> "string"</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+    </section>
+
+
+    <section>
+      <h3>Integer and Number Schemas</h3>
+
+      <section class="specterm" id="JSONSCHEMAIntegerSchema" about="jsonschema:IntegerSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMAIntegerSchema"><code>jsonschema:IntegerSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#IntegerSchema</p>
+        <p><strong>a OWL Class</strong></p>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition">A JSON integer value specification, that is, numbers without a fractional part ("type": "integer").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:IntegerSchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMAIntegerSchema0]"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema0]" property="owl:hasValue" content="integer"><em><b>HAS VALUE</b></em> "integer"</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Restrictions</th>
+                    <td>
+                      <span about="jsonschema:IntegerSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAIntegerSchema1]"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema1]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema1]" rel="owl:onProperty" resource="jsonschema:minimum"><a href="#JSONSCHEMAminimum">jsonschema:minimum</a></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema1]" property="owl:allValuesFrom" resource="xsd:integer"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></span>
+                      <br>
+                      <span about="jsonschema:IntegerSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAIntegerSchema2]"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema2]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema2]" rel="owl:onProperty" resource="jsonschema:maximum"><a href="#JSONSCHEMAmaximum">jsonschema:maximum</a></span>
+                      <span about="[_:JSONSCHEMAIntegerSchema2]" property="owl:allValuesFrom" resource="xsd:integer"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMANumberSchema" about="jsonschema:NumberSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMANumberSchema"><code>jsonschema:NumberSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#NumberSchema</p>
+        <p><strong>a OWL Class</strong></p>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition">A JSON number value specification ("type": "number").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:NumberSchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMANumberSchema0]"></span>
+                      <span about="[_:JSONSCHEMANumberSchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMANumberSchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMANumberSchema0]" property="owl:hasValue" content="number"><em><b>HAS VALUE</b></em> "number"</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Restrictions</th>
+                    <td>
+                      <span about="jsonschema:NumberSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMANumberSchema1]"></span>
+                      <span about="[_:JSONSCHEMANumberSchema1]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMANumberSchema1]" rel="owl:onProperty" resource="jsonschema:minimum"><a href="#JSONSCHEMAminimum">jsonschema:minimum</a></span>
+                      <span about="[_:JSONSCHEMANumberSchema1]" property="owl:allValuesFrom" resource="[_:JSONSCHEMANumberSchema11]"><em><b>ONLY</b></em> <span class="todo"> union of xsd:double and xsd:integer</span></span>
+                      <br>
+                      <span about="jsonschema:NumberSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMANumberSchema2]"></span>
+                      <span about="[_:JSONSCHEMANumberSchema2]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMANumberSchema2]" rel="owl:onProperty" resource="jsonschema:maximum"><a href="#JSONSCHEMAmaximum">jsonschema:maximum</a></span>
+                      <span about="[_:JSONSCHEMANumberSchema2]" property="owl:allValuesFrom" resource="[_:JSONSCHEMANumberSchema21]"><em><b>ONLY</b></em> <span class="todo"> union of xsd:double and xsd:integer</span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAminimum" about="jsonschema:minimum" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAminimum"><code>jsonschema:minimum</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#minimum</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">minimum</em> - <span property="rdfs:comment skos:definition">Specifies a minimum numeric value. Only applicable for associated number or integer types.</span>
+        </p>
+              <p class="ednote">WARNING: range xsd:double here incompatible with definition of IntegerSchema ( ---> cannot instantiate IntegerSchema)</p>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:minimum" rel="rdfs:range" resource="xsd:double"><a href="http://www.w3.org/2001/XMLSchema#double">xsd:double</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+      
+      <section class="specterm" id="JSONSCHEMAmaximum" about="jsonschema:maximum" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAmaximum"><code>jsonschema:maximum</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#maximum</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+        <p><em property="rdfs:label">maximum</em> - <span property="rdfs:comment skos:definition">Specifies a maximum numeric value. Only applicable for associated number or integer types.</span>
+        </p>
+                      <p class="ednote">WARNING: range xsd:double here incompatible with definition of IntegerSchema ( ---> cannot instantiate IntegerSchema)</p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:maximum" rel="rdfs:range" resource="xsd:double"><a href="http://www.w3.org/2001/XMLSchema#double">xsd:double</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <h3>ArraySchema</h3>
+      <section class="specterm" id="JSONSCHEMAArraySchema" about="jsonschema:ArraySchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMAArraySchema"><code>jsonschema:ArraySchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#ArraySchema</p>
+        <p><strong>a OWL Class</strong></p>
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition">A JSON array specification ("type": "array").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:ArraySchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMAArraySchema0]"></span>
+                      <span about="[_:JSONSCHEMAArraySchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAArraySchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMAArraySchema0]" property="owl:hasValue" content="array"><em><b>HAS VALUE</b></em> "array"</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Restrictions</th>
+                    <td>
+                      <span about="jsonschema:ArraySchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAArraySchema1]"></span>
+                      <span about="[_:JSONSCHEMAArraySchema1]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAArraySchema1]" rel="owl:onProperty" resource="jsonschema:items"><a href="#JSONSCHEMAitems">jsonschema:items</a></span>
+                      <span about="[_:JSONSCHEMAArraySchema1]" property="owl:allValuesFrom" resource="jsonschema:DataSchema"><em><b>ONLY</b></em> <a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                      <br>
+                      <span about="jsonschema:ArraySchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAArraySchema2]"></span>
+                      <span about="[_:JSONSCHEMAArraySchema2]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAArraySchema2]" rel="owl:onProperty" resource="jsonschema:minItems"><a href="#JSONSCHEMAminItems">jsonschema:minItems</a></span>
+                      <span about="[_:JSONSCHEMAArraySchema2]" property="owl:allValuesFrom" resource="xsd:unsignedInt"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#unsignedInt">xsd:unsignedInt</a></span>
+                      <br>
+                      <span about="jsonschema:ArraySchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAArraySchema3]"></span>
+                      <span about="[_:JSONSCHEMAArraySchema3]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAArraySchema3]" rel="owl:onProperty" resource="jsonschema:minItems"><a href="#JSONSCHEMAminItems">jsonschema:minItems</a></span>
+                      <span about="[_:JSONSCHEMAArraySchema3]" property="owl:allValuesFrom" resource="xsd:unsignedInt"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#unsignedInt">xsd:unsignedInt</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAitems" about="jsonschema:items" typeof="owl:ObjectProperty">
+        <h5><a href="#JSONSCHEMAitems"><code>jsonschema:items</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#items</p>
+        <p><strong>a OWL Object Property</strong></p>
+
+        <p><em property="rdfs:label">items</em> - <span property="rdfs:comment skos:definition">Used to define the characteristics of an array.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:items" rel="rdfs:range" resource="jsonschema:DataSchema"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+      
+      <section class="specterm" id="JSONSCHEMAminItems" about="jsonschema:minItems" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAminItems"><code>jsonschema:minItems</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#minItems</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+
+        <p><em property="rdfs:label">minItems</em> - <span property="rdfs:comment skos:definition">Defines the minimum number of items that have to be in the array.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:minItems" rel="rdfs:range" resource="xsd:unsignedInt"><a href="http://www.w3.org/2001/XMLSchema#unsignedInt">xsd:unsignedInt</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+      
+      <section class="specterm" id="JSONSCHEMAmaxItems" about="jsonschema:maxItems" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMAmaxItems"><code>jsonschema:maxItems</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#maxItems</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+
+        <p><em property="rdfs:label">maxItems</em> - <span property="rdfs:comment skos:definition">Defines the maxImum number of items that have to be in the array.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:maxItems" rel="rdfs:range" resource="xsd:unsignedInt"><a href="http://www.w3.org/2001/XMLSchema#unsignedInt">xsd:unsignedInt</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <h3>Object Schema</h3>
+      <section class="specterm" id="JSONSCHEMAObjectSchema" about="jsonschema:ObjectSchema" typeof="owl:Class">
+        <h5><a href="#JSONSCHEMAObjectSchema"><code>jsonschema:ObjectSchema</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#ObjectSchema</p>
+        <p><strong>a OWL Class</strong></p>
+
+        <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition"> A JSON object specification ("type": "object").</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="restrictions">Sub class of</th>
+                    <td>
+                      <span rel="rdfs:subClassOf"><a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Equivalent to</th>
+                    <td>
+                      <span about="jsonschema:ObjectSchema" rel="owl:equivalentClass" resource="[_:JSONSCHEMAObjectSchema0]"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema0]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema0]" rel="owl:onProperty" resource="jsonschema:type"><a href="#JSONSCHEMAtype">jsonschema:type</a></span>
+                      <span about="[_:JSONSCHEMAObjectSchema0]" property="owl:hasValue" content="object"><em><b>HAS VALUE</b></em> "object"</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="restrictions">Restrictions</th>
+                    <td>
+                      <span about="jsonschema:ObjectSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAObjectSchema1]"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema1]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema1]" rel="owl:onProperty" resource="jsonschema:required"><a href="#JSONSCHEMArequired">jsonschema:required</a></span>
+                      <span about="[_:JSONSCHEMAObjectSchema1]" property="owl:allValuesFrom" resource=" http://www.w3.org/2001/XMLSchema#string"><em><b>ONLY</b></em> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></span>
+                      <br>
+                      <span about="jsonschema:ObjectSchema" rel="rdfs:subClassOf" resource="[_:JSONSCHEMAObjectSchema2]"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema2]" typeof="owl:Restriction"></span>
+                      <span about="[_:JSONSCHEMAObjectSchema2]" rel="owl:onProperty" resource="jsonschema:properties"><a href="#JSONSCHEMAproperties">jsonschema:properties</a></span>
+                      <span about="[_:JSONSCHEMAObjectSchema2]" property="owl:allValuesFrom" resource="#JSONSCHEMADataSchema"><em><b>ONLY</b></em> <a href="#JSONSCHEMADataSchema">jsonschema:DataSchema</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMArequired" about="jsonschema:required" typeof="owl:DatatypeProperty">
+        <h5><a href="#JSONSCHEMArequired"><code>jsonschema:required</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#required</p>
+        <p><strong>a OWL Datatype Property</strong></p>
+
+        <p><em property="rdfs:label">required</em> - <span property="rdfs:comment skos:definition">Defines which members of the object type are mandatory.</span>
+        </p>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Range</th>
+                    <td>
+                      <span about="jsonschema:required" rel="rdfs:range" resource="xsd:string"><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </section>
+
+      <section class="specterm" id="JSONSCHEMAproperties" about="jsonschema:properties" typeof="owl:ObjectProperty">
+        <h5><a href="#JSONSCHEMAproperties"><code>jsonschema:properties</code></a></h5>
+        <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/json-schema#properties</p>
+        <p><strong>a OWL Object Property</strong></p>
+
+        <p><em property="rdfs:label">properties</em> - <span property="rdfs:comment skos:definition">Data schema nested definitions</span>
+        </p>
+      </section>
+
+    </section>
+
+  </section>
+
+
+
+
+  <section>
+    <h1>The Security Ontology</h1>
+
+    <p>This section introduces the specification for the Security Ontology. This ontology defines terms for the WoT Security Vocabulary Definition Information Model [[WOT-THING-DESCRIPTION]].</p>
+
+    <section>
+    <h1>Namespaces</h1>
+
+      <p style="text-align: center;">
+          The namespace for Data Schema Ontology terms is <span class="repeated" style="font-family: courier;">
+      http://www.w3.org/ns/wot-security#</span>
+      </p>
+      <p style="text-align: center;">
+          The suggested prefix for the TD namespace is <span class="repeated" style="font-family: courier;">
+      wotsec</span>
+      </p>
+      <p style="text-align: center;">
+          The Turtle version of the TD ontology is available at <a href="http://www.w3.org/ns/wot-security/wot-security.ttl">http://www.w3.org/ns/wot-security/wot-security.ttl</a>
+      </p>
+    </section>
+
+    <section id="JSONSCHEMAoverview">
+      <h3>Overview of Classes and Properties</h3>
+      <div>
+        <div class="azlist">
+          <p>Classes:
+              <a href="#WOTSECAPIKeySecurityScheme">wotsec:APIKeySecurityScheme</a> , 
+              
+          </p>
+        </div>
+        <div class="azlist">
+            <p>Object Properties:
+
+            </p>
+        </div>
+        <div class="azlist">
+            <p>Datatype Properties:
+              <a href="#WOTSECalg">wotsec:alg</a> , 
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>SecurityScheme</h3>
+
+    </section>
+
+</section>
+
+
   </section>
 
 
@@ -599,8 +1227,58 @@
   </section>
 
 
+  <section id="sec-security-consideration">
+  <h4>Security and Privacy Considerations</h4>
+  
+  <p class="ednote">
+  Complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration
+">https://w3c.github.io/wot-thing-description/
+#sec-security-consideration</a>. First few sentences of this section are copied from the TD spec.
+  </p>
+
+
+  <p>
+  In general the security measures taken to protect a WoT 
+  system will depend on the threats and attackers that system
+  may face and the value of the assets needs to protect.
+  A detailed discussion of security and privacy considerations for the Web of Things,
+  including a threat model that can be adapted to various circumstances, is
+  presented in the informative document [[!WOT-SECURITY-CONSIDERATIONS]].  
+  </p>
+  <p>
+  This section complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration">Section 7</a> in [[WOT-TD]].
+</p>
+    <section id="sec-security-consideration-context">
+    <h5>Context Dereferencing Privacy Risk</h5>
+        <p>Deferencing the vocabulary files given in the <code>@context</code>
+            field of any JSON-LD document can be a privacy risk.
+            In the case of the WoT, an attacker can observe the network
+            traffic produced by such deferences and can use the metadata
+            of the dereference, such as the destination IP address,
+            to infer information about the device especially if domain-specific
+            vocabularies are used.  This is a risk even if the connection
+            is encrypted, and is related to DNS privacy leaks.
+        </p>
+        <dl><dt>Mitigation:</dt><dd>
+            Avoid actual dereferencing of vocabulary files.
+            Vocabulary files should be cached whenever possible.
+            Ideally they would be made immutable, built into the interpreting device,
+            and not derefenced at all,
+            with the URI in the <code>@context</code> field serving only as 
+            an identifier of the (known) vocabulary. 
+            This requires the use of strict version control, as updates
+            should use a new URI to ensure that existing URIs can refer to 
+            immutable data.
+            Use well-known standard vocabulary files whenever possible to
+            improve the chances that the context file will be available locally
+            to systems interpreting the metadata in a Thing Description.
+        </dd></dl>
+     </section>
+   </section>
+
+
   <section id="movedfromtd">
-  <h1>Bits and Pieces moved here from TD</h1>
+  <h1>Bits and Pieces moved here from the TD document</h1>
 
 <pre class="example">
 {  
@@ -639,7 +1317,7 @@
 
 
 
-    The Thing Description instance needs to be transformed
+  <p>The Thing Description instance needs to be transformed
   into valid JSON-LD first.  
   In terms of JSON-LD 1.1 serialization, 
   the open-world assumption of RDF semantic processing requires vocabulary terms
@@ -884,7 +1562,7 @@ Equivalent to example 2:
      MUST be inserted explicitly with their default value.
   </span></li>
   </ul>
-  </p>
+
 
   <!-- FIX: Actually, the examples in the next section
        are not that good because they
@@ -960,9 +1638,6 @@ Equivalent to example 2:
 
   </section>
 
-
-
-
   <section id="example" class="appendix">
   <h1>Complete Examples</h1>
   
@@ -984,57 +1659,6 @@ Equivalent to example 2:
   <section id="changes" class="appendix">
   <h1>Change History</h1>
   </section>
-
-
-
-  <section id="sec-security-consideration">
-  <h4>Security and Privacy Considerations</h4>
-  
-  <p class="ednote">
-  Complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration
-">https://w3c.github.io/wot-thing-description/
-#sec-security-consideration</a>. First few sentences of this section are copied from the TD spec.
-  </p>
-
-
-  <p>
-  In general the security measures taken to protect a WoT 
-  system will depend on the threats and attackers that system
-  may face and the value of the assets needs to protect.
-  A detailed discussion of security and privacy considerations for the Web of Things,
-  including a threat model that can be adapted to various circumstances, is
-  presented in the informative document [[!WOT-SECURITY-CONSIDERATIONS]].  
-  </p>
-  <p>
-  This section complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration">Section 7</a> in [[WOT-TD]].
-</p>
-    <section id="sec-security-consideration-context">
-    <h5>Context Dereferencing Privacy Risk</h5>
-        <p>Deferencing the vocabulary files given in the <code>@context</code>
-            field of any JSON-LD document can be a privacy risk.
-            In the case of the WoT, an attacker can observe the network
-            traffic produced by such deferences and can use the metadata
-            of the dereference, such as the destination IP address,
-            to infer information about the device especially if domain-specific
-            vocabularies are used.  This is a risk even if the connection
-            is encrypted, and is related to DNS privacy leaks.
-        </p>
-        <dl><dt>Mitigation:</dt><dd>
-            Avoid actual dereferencing of vocabulary files.
-            Vocabulary files should be cached whenever possible.
-            Ideally they would be made immutable, built into the interpreting device,
-            and not derefenced at all,
-            with the URI in the <code>@context</code> field serving only as 
-            an identifier of the (known) vocabulary. 
-            This requires the use of strict version control, as updates
-            should use a new URI to ensure that existing URIs can refer to 
-            immutable data.
-            Use well-known standard vocabulary files whenever possible to
-            improve the chances that the context file will be available locally
-            to systems interpreting the metadata in a Thing Description.
-        </dd></dl>
-     </section>
-   </section>
 
 
 
