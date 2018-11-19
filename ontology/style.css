@@ -1,11 +1,3 @@
-/* Force W3C logo to site side by side with OGC logo */
-.head img[src*="logos/W3C"] {
-  display: inherit !important;
-}
-.head a:hover > img[src*='ogc'] {
-  opacity: 0.8;
-}
-
 /* Styles to replicate key LODS styles */
 ul.hlist {
   list-style-type:none;
@@ -76,41 +68,15 @@ section.specterm {
 }
 
 
-/* Styles added by Kerry for formatting code including ttl */
-.tab1 {
- text-indent: 24pt;
-}
-.tab2 {
- text-indent: 48pt;
-}
-.tab3 {
- text-indent: 72pt;
-}
-.tab4 {
- text-indent: 96pt;
-}
-.tab5 {
- text-indent: 120pt;
-}
-
-/* Styles added by Simon for clean table borders */
-
 table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background-color: #f2f2f2;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
+  border-top: 1px solid #bbd7e9;
+  padding: 10px;
+  text-align: left;
 }
 
 .specterm h5 , .specterm h6 {
@@ -121,28 +87,7 @@ th, td {
   margin-bottom: 1em;
 }
 
-section.specterm, section.specterm th{
-    background-color: #c7eae5;
-}
-
-section.specterm.sosa, section.specterm.sosa th{
-    background-color: #c7eae5;
-}
-
-section.specterm.ssn, section.specterm.ssn th, section.specterm.sosa tr.ssn, section.specterm.sosa tr.ssn th {
-    background-color: #67a9cf;
-}
-
-
-.buttonpanel {
-   display: flex;
-   justify-content: flex-end ;
-    margin-top: 1ex;
-    margin-bottom: 1ex;
-    padding-left: 1ex;
-    padding-right: 1ex;
-    padding-top: 1ex;
-    padding-bottom: 0.6ex;
-    border: 0px dotted black;
-    font-size: small;
+section.specterm {
+    border-left: 0.5em solid #8CCBF2;
+    background-color: #DEF;
 }
