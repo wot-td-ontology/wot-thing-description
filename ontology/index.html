@@ -1261,7 +1261,7 @@
         </ol>
       </li>
       <li>
-        If <var>type</var> is <code>Property</code>:
+        Else, if <var>type</var> is <code>Property</code>:
         <ol>
           <li>
             Call recursively the algorithm with <var>object</var>, the string
@@ -1278,7 +1278,7 @@
         </ol>
       </li>
       <li>
-        If <var>type</var> is <code>Action</code>:
+        Else, if <var>type</var> is <code>Action</code>:
         <ol>
           <li>
             If <var>object</var> has member <code>input</code>:
@@ -1313,7 +1313,7 @@
         </ol>
       </li>
       <li>
-        If <var>type</var> is <code>Event</code>:
+        Else, if <var>type</var> is <code>Event</code>:
         <ol>
           <li>
               If <var>object</var> has member <code>data</code>:
@@ -1341,7 +1341,7 @@
         </ol>
       </li>
       <li>
-        If <var>type</var> is <code>DataSchema</code>:
+        Else, if <var>type</var> is <code>DataSchema</code>:
         <ol>
           <li>
             If <var>object</var>'s member <code>type</code> is
@@ -1357,7 +1357,7 @@
                 <ol>
                   <li>
                     The member <code>properties</code> of <var>node</var> is
-                    initialized as an empty array.
+                    initialized as an empty array <em>(TODO: name conflict)</em>.
                   </li>
                   <li>
                     If <var>object</var> has member <code>required</code> and
@@ -1441,12 +1441,17 @@
         </ol>
       </li>
       <li>
-        If <var>type</var> is <code>SecuritySchema</code>:
+        Else, if <var>type</var> is <code>SecuritySchema</code>:
         (<em>TODO</em>).
       </li>
       <li>Return <var>node</var></li>
     </ol>
   </section>
+
+  <p class="issue">
+    Currently, the context served at <code>http://www.w3.org/ns/td</code> is a
+    JSON-LD 1.1 context. The complete transformation will therefore fail.
+  </p>
 
   </section>
 
