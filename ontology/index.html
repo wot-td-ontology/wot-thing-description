@@ -99,36 +99,6 @@
                 , href:     "https://www.iana.org/assignments/media-types/media-types.xhtml"
                 , publisher: "IANA"
                 }
-              , "WOT-ARCHITECTURE" : {
-                  title: "Web of Things Architecture"
-                , href: "https://w3c.github.io/wot-architecture/"
-                , authors:  [
-                    "Kazuo Kajimoto"
-                  , "Matthias Kovatsch"
-                  , "Uday Davuluru"
-                  ]
-                , publisher: "W3C"
-                , date: "20 August 2017"
-                }
-              , "WOT-THING-DESCRIPTION" : {
-                  title: "Web of Things (WoT) Thing Description"
-                , href: "https://w3c.github.io/wot-thing-description/"
-                , authors:  [
-                    "Sebastian Kaebisch"
-                  , "Takuki Kamiya"
-                  ]
-                , publisher: "W3C"
-                , date: "21 October 2018"
-                }
-        , "WOT-PROTOCOL-BINDING" : {
-                  title: "Web of Things Protocol Binding Templates"
-                , href: "https://w3c.github.io/wot-binding-templates/"
-                , authors:  [
-                    "Michael Koster"
-                  ]
-                , publisher: "W3C"
-                , date: "12 January 2018"
-                }
               }
             , otherLinks: [
                 {
@@ -175,7 +145,7 @@
 
   <section id="abstract">
   <p>
-  This document complements the Web of Things (WoT) Thing Description [[WOT-THING-DESCRIPTION]]. It extends the Thing Description specification with capabilities to inject semantic annotations; specifies a Thing Description Ontology (TD) to describe Thing Descriptions; and provides an algorithm to generate a OWL 2 description of a Thing Description along with its semantic annotations. Alignment to the W3C Semantic Sensor Networks ontology is provided [[vocab-ssn]].
+  This document complements the Web of Things (WoT) Thing Description [[wot-thing-description]]. It extends the Thing Description specification with capabilities to inject semantic annotations; specifies a Thing Description Ontology (TD) to describe Thing Descriptions; and provides an algorithm to generate a OWL 2 description of a Thing Description along with its semantic annotations. Alignment to the W3C Semantic Sensor Networks ontology is provided [[vocab-ssn]].
   </p>
   </section>
 
@@ -211,7 +181,7 @@
 
   <p class="ednote" title="Binding Vocabulary and Prefixes">
    The TD will reuse existing vocabulary definitions such as for http from the 
-   <a href="http://www.w3.org/2011/http#">http://www.w3.org/2011/http#</a> namespace. In that case the prefix <code>http</code> is used. However, there are prefixes such as <code>coap</code> and <code>mqtt</code> which have no namespace yet. Currently there are efforts to have such namespace representations which will be referenced in this specification in the future. In the meantime,  the [[!WOT-PROTOCOL-BINDING]] provides the list of terms that can be used to specify the protocol metadata in the Thing Description.
+   <a href="http://www.w3.org/2011/http#">http://www.w3.org/2011/http#</a> namespace. In that case the prefix <code>http</code> is used. However, there are prefixes such as <code>coap</code> and <code>mqtt</code> which have no namespace yet. Currently there are efforts to have such namespace representations which will be referenced in this specification in the future. In the meantime,  the [[!wot-binding-templates]] provides the list of terms that can be used to specify the protocol metadata in the Thing Description.
   </p>
 
 
@@ -232,7 +202,7 @@
   <section>
     <h1>The Thing Description (TD) Ontology</h1>
 
-    <p>This section introduces the specification for the TD Ontology. This ontology defines terms for the WoT TD Information Model [[WOT-THING-DESCRIPTION]]. It also defines term <code>td:isAbstractionOf</code> to link Thing Descriptions to the physical entities they are abstractions of, and term <code>td:isDescriptionOf</code> to link a Thing Property to some actuatable or observable physical property it is a description of.</p>
+    <p>This section introduces the specification for the TD Ontology. This ontology defines terms for the WoT TD Information Model [[wot-thing-description]]. It also defines term <code>td:isAbstractionOf</code> to link Thing Descriptions to the physical entities they are abstractions of, and term <code>td:isDescriptionOf</code> to link a Thing Property to some actuatable or observable physical property it is a description of.</p>
 
     <section>
     <h1>Namespaces</h1>
@@ -286,7 +256,7 @@
         <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Thing</p>
         <p><strong>a OWL Class</strong></p>
 
-        <p><em property="rdfs:label">Thing</em> - <span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span> - <span property="rdfs:comment skos:definition"> An abstraction of a physical or virtual entity whose metadata and interfaces are described by a WoT Thing Description. This entity can be an existing device augmented with a Thing Description, a logical component of a device that has a software stack that natively provides Thing Descriptions (see Servient), a local hardware component of a Servient, or a logical entity (e.g., location) that does not directly provide any software stack such as a room or building.</span>
+        <p><em property="rdfs:label">Thing</em> - <span class="todo">Copy final definition from [[wot-architecture]]</span> - <span property="rdfs:comment skos:definition"> An abstraction of a physical or virtual entity whose metadata and interfaces are described by a WoT Thing Description. This entity can be an existing device augmented with a Thing Description, a logical component of a device that has a software stack that natively provides Thing Descriptions (see Servient), a local hardware component of a Servient, or a logical entity (e.g., location) that does not directly provide any software stack such as a room or building.</span>
         </p>
         <p property="rdfs:comment">
           Depending on the use case, an instance of <code>td:Thing</code> may also be an instance of one or more of the following classes in [[vocab-ssn]]: <code>sosa:FeatureOfInterest</code>, <code>sosa:Sample</code>, <code>sosa:Sensor</code>, <code>sosa:Actuator</code>, <code>sosa:Sampler</code>, <code>sosa:Platform</code>, <code>ssn:System</code>
@@ -420,7 +390,7 @@
         <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#PropertyResource</p>
         <p><strong>a OWL Class</strong></p>
 
-        <p><em property="rdfs:label">PropertyResource</em> - <span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span> - <span property="rdfs:comment skos:definition"> An Interaction Pattern to read a specific value of a Thing and optionally to write it.</span>
+        <p><em property="rdfs:label">PropertyResource</em> - <span class="todo">Copy final definition from [[wot-architecture]]</span> - <span property="rdfs:comment skos:definition"> An Interaction Pattern to read a specific value of a Thing and optionally to write it.</span>
         </p>
         <p property="rdfs:comment">
           Depending on the use case, an instance of <code>td:PropertyResource</code> may also be an instance of the following classes in [[vocab-ssn]]: <code>sosa:ObservableProperty</code>, <code>sosa:ActuatableProperty</code>, <code>ssn:Property</code>.
@@ -562,7 +532,7 @@
           <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/td#Form</p>
           <p><strong>a OWL Class</strong></p>
 
-          <em property="rdfs:label">Form</em> - <span property="rdfs:comment skos:definition"><span class="todo">Copy final definition from [[WOT-ARCHITECTURE]]</span></span>
+          <em property="rdfs:label">Form</em> - <span property="rdfs:comment skos:definition"><span class="todo">Copy final definition from [[wot-architecture]]</span></span>
           <br>
       </section>
     </section>
@@ -581,7 +551,7 @@
   <section>
     <h1>The Data Schema Ontology</h1>
 
-    <p>This section introduces the specification for the Data Schema Ontology. This ontology defines terms for the WoT Data Schema Vocabulary Definition Information Model [[WOT-THING-DESCRIPTION]].</p>
+    <p>This section introduces the specification for the Data Schema Ontology. This ontology defines terms for the WoT Data Schema Vocabulary Definition Information Model [[wot-thing-description]].</p>
 
     <section>
     <h1>Namespaces</h1>
@@ -1148,7 +1118,7 @@
   <section>
     <h1>The Security Ontology</h1>
 
-    <p>This section introduces the specification for the Security Ontology. This ontology defines terms for the WoT Security Vocabulary Definition Information Model [[WOT-THING-DESCRIPTION]].</p>
+    <p>This section introduces the specification for the Security Ontology. This ontology defines terms for the WoT Security Vocabulary Definition Information Model [[wot-thing-description]].</p>
 
     <section>
     <h1>Namespaces</h1>
@@ -1202,27 +1172,281 @@
   <section id="algorithm">
   <h1>Algorithm to deserialize TD to RDF</h1>
 
-  <p>This section defines an algorithm for programmatic deserialization of a JSON TD document to an RDF dataset.</p>
-
-  <p class="todo">Could reuse style of <a href="https://www.w3.org/TR/json-ld-api/#h3_deserialize-json-ld-to-rdf-algorithm">JSON-LD algorithm</a></p> 
-
+  <p>
+    This section defines an algorithm for programmatic deserialization of a
+    JSON TD document to an RDF dataset.
+  </p>
 
   <h2>Overview</h2>
 
   <p>The algorithm consists of two distinct steps:</p>
 
   <ol>
-    <li>Transformation of the JSON TD into a JSON-LD document</li>
-    <li>Application of the standard JSON-LD 1.0 algorithm <em>Deserialize JSON-LD to RDF algorithm</em></li>
+    <li>Transformation of the JSON TD into a JSON-LD document (presented below)</li>
+    <li>
+      Application of the standard JSON-LD 1.0 algorithm
+      <a href="https://w3c.github.io/json-ld-api/#deserialize-json-ld-to-rdf-algorithm">
+        <em>Deserialize JSON-LD to RDF algorithm</em>
+      </a>
+      (sec. 8.1, [[json-ld-api]])
+    </li>
   </ol>
 
-  <h2>Algorithm</h2>
+  <p>
+    The algorithm takes as input a plain JSON <em>object</em> and turns it into
+    a <em>node object</em> as defined by the JSON-LD specification (and possibly
+    including members like <code>@id</code> and <code>@type</code>). The input
+    object is recursively traversed to compute a <em>JSON pointer</em>
+    [[rfc6901]], then used as a relative IRI, for every nested object included in
+    the TD. Every object is then processed according to its type, as defined in
+    the TD information model (sec. 5.1, [[wot-thing-description]]).
+  </p>
 
-  <p><span class="rfc2119-assertion" id="td-context">
-  The root object of a Thing Description instance MAY include the
-  <code>@context</code> key from JSON-LD 1.1 with the value URI of 
-  the Thing description context file <code>http://www.w3.org/ns/td</code>.
-  </span></p>
+  <section class="algorithm">
+    <h2>Algorithm</h2>
+  
+    <p>The algorithm takes a JSON object <var>object</var>, a string
+      <var>type</var> and a string <var>pointer</var> as input.</p>
+
+    <ol>
+      <li>
+        Initialize a JSON object <var>node</var> with two members:
+        <code>@id</code> equal to <var>pointer</var> and <code>@type</code> as
+        an array with a single element equal to <var>type</var>.
+      </li>
+      <li>
+        For each member of <var>object</var>, copy its value in
+        <var>node</var>.
+      </li>
+      <li>
+        If <var>type</var> is <code>Thing</code>:
+        <ol>
+          <li>
+            The member <code>@context</code> of <var>node</var> is
+            the string <code>http://www.w3.org/ns/td</code>.
+          </li>
+          <li>
+            If <var>object</var> has a member <code>properties</code>
+            and it is a dictionary:
+            <ol>
+              <li>
+                The member <code>properties</code> of <var>node</var> is
+                initialized as an empty array.
+              <li>
+                For all key <var>property</var> and value <var>property
+                object</var> in the dictionary:
+                <ol>
+                  <li>
+                    The variable <var>property pointer</var> is the
+                    concatenation of <var>pointer</var>, the string
+                    <code>/properties/</code> and <var>property</var>.
+                  </li>
+                  <li>
+                    Call recursively the algorithm with
+                    <var>property value</var>, the string <code>Property</code>
+                    and <var>property pointer</var> as arguments. Append the
+                    returned value to <var>node</var>'s <code>properties</code>
+                    array. 
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>
+            Perform similar operations with member <code>actions</code> (<em>TODO</em>).
+          </li>
+          <li>
+              Perform similar operations with member <code>events</code> (<em>TODO</em>).
+          </li>
+        </ol>
+      </li>
+      <li>
+        If <var>type</var> is <code>Property</code>:
+        <ol>
+          <li>
+            Call recursively the algorithm with <var>object</var>, the string
+            <code>DataSchema</code> and <var>pointer</var> as arguments.
+            Substitute <var>node</var> with the returned value and append
+            <code>Property</code> to the <code>@type</code> array of
+            <var>node</var>.
+          </li>
+          <li>
+            If <var>object</var> has no member <code>observable</code>,
+            <var>node</var>'s <code>observable</code> member is equal
+            to <code>false</code>.
+          </li>
+        </ol>
+      </li>
+      <li>
+        If <var>type</var> is <code>Action</code>:
+        <ol>
+          <li>
+            If <var>object</var> has member <code>input</code>:
+            <ol>
+              <li>
+                <var>input value</var> is the value of <var>object</var>'s
+                <code>input</code> and <var>input pointer</var> is the
+                concatenation of <var>pointer</var> and the string
+                <code>/input</code>.
+              </li>
+              <li>
+                Call recursively the algorithm with <var>input value</var>,
+                the string <code>DataSchema</code> and <var>input pointer</var>
+                as arguments. <var>node</var>'s <code>input</code> value is the
+                returned value.
+              </li>
+            </ol>
+          </li>
+          <li>
+            Perform similar operations with member <code>output</code> (<em>TODO</em>).
+          </li>
+          <li>
+            If <var>object</var> has no member <code>safe</code>,
+            <var>node</var>'s <code>safe</code> member is equal
+            to <code>false</code>.
+          </li>
+          <li>
+            If <var>object</var> has no member <code>idempotent</code>,
+            <var>node</var>'s <code>idempotent</code> member is equal
+            to <code>false</code>.
+          </li>
+        </ol>
+      </li>
+      <li>
+        If <var>type</var> is <code>Event</code>:
+        <ol>
+          <li>
+              If <var>object</var> has member <code>data</code>:
+              <ol>
+                <li>
+                  <var>data value</var> is the value of <var>object</var>'s
+                  <code>data</code> and <var>data pointer</var> is the
+                  concatenation of <var>pointer</var> and the string
+                  <code>/data</code>.
+                </li>
+                <li>
+                  Call recursively the algorithm with <var>data value</var>,
+                  the string <code>DataSchema</code> and <var>data pointer</var>
+                  as arguments. <var>node</var>'s <code>data</code> value is the
+                  returned value.
+                </li>
+              </ol>
+          </li>
+          <li>
+              Perform similar operations with member <code>subscription</code> (<em>TODO</em>).
+          </li>
+          <li>
+              Perform similar operations with member <code>cancellation</code> (<em>TODO</em>).
+          </li>
+        </ol>
+      </li>
+      <li>
+        If <var>type</var> is <code>DataSchema</code>:
+        <ol>
+          <li>
+            If <var>object</var>'s member <code>type</code> is
+            <code>object</code>:
+            <ol>
+              <li>
+                Append the string <code>ObjectSchema</code> to
+                <var>node</var>'s <code>@type</code> array.
+              </li>
+              <li>
+                If <var>object</var> has member <code>properties</code>
+                and it is a dictionary:
+                <ol>
+                  <li>
+                    The member <code>properties</code> of <var>node</var> is
+                    initialized as an empty array.
+                  </li>
+                  <li>
+                    If <var>object</var> has member <code>required</code> and
+                    it is an array, the member <code>required</code> of
+                    <var>node</var> is initialized as an empty array.
+                  </li>
+                  <li>
+                    For all key <var>property</var> and
+                    value <var>property value</var> in the dictionary:
+                    <ol>
+                      <li>
+                        <var>property pointer</var> is the concatenation of
+                        <var>pointer</var> and the string
+                        <code>/properties/</code> and <var>property</var>.
+                      </li>
+                      <li>
+                          Call recursively the algorithm with <var>property
+                          value</var>, the string <code>DataSchema</code> and
+                          <var>property pointer</var> as arguments. Append the
+                          returned value to <var>node</var>'s
+                          <code>properties</code> array.
+                      </li>
+                      <li>
+                        If <var>property</var> is an element of
+                        <var>object</var>'s <code>required</code> array, append
+                        <var>property pointer</var> to <var>node</var>'s
+                        <code>required</code> array.
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Else, if <var>object</var>'s member <code>type</code> is
+            <code>array</code>:
+            <ol>
+              <li>
+                Append the string <code>ArraySchema</code> to
+                <var>node</var>'s <code>@type</code> array.
+              </li>
+              <li>
+                If <var>object</var> has member <code>items</code>:
+                <ol>
+                  <li>
+                    <var>items value</var> is <var>object</var>'s
+                    <code>items</code> value and <var>items pointer</var> is the
+                    concatenation of <var>pointer</var> and the string
+                    <code>/items</code>.
+                  </li>
+                  <li>
+                      Call recursively the algorithm with <var>items value</var>,
+                      the string <code>DataSchema</code> and <var>items
+                      pointer</var> as arguments. <var>node</var>'s
+                      <code>items</code> value is the returned value.
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>
+            Else, if <var>object</var>'s member <code>type</code> is
+            <code>string</code>, append the string <code>StringSchema</code>
+            to <var>node</var>'s <code>@type</code> array.
+          </li>
+          <li>
+            Else, if <var>object</var>'s member <code>type</code> is
+            <code>number</code>, append the string <code>NumberSchema</code>
+            to <var>node</var>'s <code>@type</code> array.
+          </li>
+          <li>
+            Else, if <var>object</var>'s member <code>type</code> is
+            <code>integer</code>, append the string <code>IntegerSchema</code>
+            to <var>node</var>'s <code>@type</code> array.
+          </li>
+          <li>
+            Else, if <var>object</var>'s member <code>type</code> is
+            <code>boolean</code>, append the string <code>BooleanSchema</code>
+            to <var>node</var>'s <code>@type</code> array.
+          </li>
+        </ol>
+      </li>
+      <li>
+        If <var>type</var> is <code>SecuritySchema</code>:
+        (<em>TODO</em>).
+      </li>
+      <li>Return <var>node</var></li>
+    </ol>
+  </section>
 
   </section>
 
@@ -1243,10 +1467,10 @@
   may face and the value of the assets needs to protect.
   A detailed discussion of security and privacy considerations for the Web of Things,
   including a threat model that can be adapted to various circumstances, is
-  presented in the informative document [[!WOT-SECURITY-CONSIDERATIONS]].  
+  presented in the informative document [[!wot-security]].  
   </p>
   <p>
-  This section complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration">Section 7</a> in [[WOT-TD]].
+  This section complements <a href="https://w3c.github.io/wot-thing-description/#sec-security-consideration">Section 7</a> in [[wot-thing-description]].
 </p>
     <section id="sec-security-consideration-context">
     <h5>Context Dereferencing Privacy Risk</h5>
