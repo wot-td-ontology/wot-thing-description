@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CoAP in OWL</title>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+    <script class='remove'>
+          var respecConfig = {
+              specStatus:     "ED"
+            , processVersion: 2018
+            , shortName:      "CoAP-in-OWL"
+            , copyrightStart: 2018
+            , noLegacyStyle:  true
+            , inlineCSS:      true
+            , noIDLIn:        true
+            , format:         "markdown"
+            , wg:             "Web of Things Working Group"
+            , wgURI:          "https://www.w3.org/WoT/WG/"
+            , wgPublicList:   "public-wot-wg"
+            , edDraftURI:     "https://wot-td-ontology.github.io/wot-thing-description/ontology/"
+            , githubAPI:      "https://api.github.com/repos/w3c/wot-thing-description"
+            , issueBase:      "https://www.github.com/w3c/wot-thing-description/issues"
+            , editors: [
+                {
+                  name:       "xxx"
+                , w3cid:      "xxxxx"
+                , company:    "xxx"
+                , companyURL: "xxx"
+                }
+              ]
+            , localBiblio: {
+                "MEDIATYPES": {
+                  title:    "Media Types"
+                , href:     "https://www.iana.org/assignments/media-types/media-types.xhtml"
+                , publisher: "IANA"
+                }
+              , "CoAP-311": {
+                  title:    "CoAP Version 3.1.1"
+                , href:     "http://docs.oasis-open.org/coap/coap/v3.1.1/coap-v3.1.1.html"
+                , publisher: "OASIS"
+                , authors:  [
+                  "Raphael J Cohn"
+                  , "Richard J Coppen"
+                  , "Andrew Banks"
+                  , "Rahul Gupta"
+                  ]
+                }
+              , "CoAP-5": {
+                  title:    "CoAP Version 5.0"
+                , href:     "http://docs.oasis-open.org/coap/coap/v5.0/coap-v5.0.html"
+                , publisher: "OASIS"
+                , authors:  [
+                  "Richard Coppen"
+                  ,"Andrew Banks"
+                  , "Ed Briggs"
+                  , "Ken Borgendale"
+                  , "Rahul Gupta"
+                  ]
+                }
+              }
+            , otherLinks: [
+                {
+                  key: "Contributors"
+                , data: [
+                    {
+                      value: "In the GitHub repository"
+                    , href: "https://github.com/w3c/wot-thing-description/graphs/contributors"
+                    }
+                  ]
+                }
+              , {
+                  key: "Repository",
+                  data: [
+                    {
+                      value: "We are on GitHub"
+                    , href: "https://github.com/w3c/wot-thing-description/"
+                    }
+                  , {
+                      value: "File a bug"
+                    , href: "https://github.com/w3c/wot-thing-description/issues"
+                    }
+                  ]
+                }
+              ]
+            };
+    </script>
+<style>
+.example {
+    border-color: #EA1252;
+    background: #FEF11E;
+    counter-increment: example;
+    overflow: auto;
+    clear: both;
+  }
+.todo {
+    background: #ffdddd;
+  }
+</style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="small.css" media="only all and (max-width: 649px)">
+</head>
+<body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# skos: http://www.w3.org/2004/02/skos/core# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/>. vann: http://purl.org/vocab/vann/ voaf: http://purl.org/vocommons/voaf# td: http://www.w3.org/ns/td#">
+
+  <section id="abstract">
+  <p>
+  This document provides a representation of the CoAP protocol using the Web Ontology Language (OWL). It defines a collection of OWL classes and properties that represent the CoAP vocabulary as defined by the CoAP specification [[CoAP]]. These OWL terms can be used to record CoAP messages in OWL. 
+  </p>
+  </section>
+
+  <section id="sotd">
+  <p>
+  This specification is not intended to reach the W3C recommendation status. Instead, it is intended to become a W3C Group Note companioning the W3C Thing Description recommendation.
+  </p>
+  </section>
+
+  <section id="namespaces">
+  <h1>Namespaces</h1>
+  <p style="text-align: center;">
+      The namespace for CoAP vocabulary terms is <span class="repeated" style="font-family: courier;">
+  http://www.w3.org/ns/coap#</span>
+  </p>
+  <p style="text-align: center;">
+      The suggested prefix for the CoAP vocabulary namespace is <span class="repeated" style="font-family: courier;">
+  coap</span>
+  </p>
+  <p style="text-align: center;">
+      The Turtle version of the CoAP vocabulary is available at <a href="http://www.w3.org/ns/coap/coap.ttl">http://www.w3.org/ns/coap/coap.ttl</a>
+  </p>
+
+  </section>
+
+  <section>
+  <h1>Axiomatization</h1>
+
+  <p>
+  This section introduces the specification for the CoAP Ontology
+  </p>
+
+  <section id="CoAPoverview">
+    <h3>Overview of Classes and Properties</h3>
+    <div>
+      <div class="azlist">
+        <p>Classes:
+            <a href="#CoAPConnection">coap:Connection</a>,
+            <a href="#CoAPMessage">coap:Message</a>,
+            <a href="#CoAPRequest">coap:Request</a>,
+            <a href="#CoAPResponse">coap:Response</a>,
+            <a href="#CoAPMessageHeader">coap:MessageHeader</a>,
+            <a href="#CoAPHeaderOption">coap:HeaderOption</a>,
+            <a href="#CoAPCriticalOption">coap:CriticalOption</a>,
+            <a href="#CoAPStatusCode">coap:StatusCode</a>,
+
+        </p>
+      </div>
+      <div class="azlist">
+          <p>Object Properties:
+          </p>
+      </div>
+      <div class="azlist">
+          <p>Datatype Properties:
+          </p>
+      </div>
+      <div class="azlist">
+          <p>Instances:
+          </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Connect</h3>
+
+    <section class="specterm" id="CoAPConnection" about="coap:Connection" typeof="owl:Class">
+      <h5><a href="#CoAPConnection"><code>coap:Connection</code></a></h5>
+      <p class="crossreference"><strong>IRI:</strong> http://www.w3.org/ns/coap#Connection</p>
+      <p><strong>a OWL Class</strong></p>
+
+      <p><em property="rdfs:label">$label</em> - <span property="rdfs:comment skos:definition"> $comment</span>
+      </p>
+    </section>
+
+
+  </section>
+
+</section>
+
+<section id="acknowledgements" class="appendix normative">
+<h1>Acknowledgements</h1>
+</section>
+
+<section id="changes" class="appendix">
+<h1>Change History</h1>
+</section>
+
+
+
+
+</body>
+</html>
